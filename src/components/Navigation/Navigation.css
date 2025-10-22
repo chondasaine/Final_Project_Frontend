@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../../assets/roboto-500.woff") format("woff");
+}
+
+.navigation {
+  display: flex;
+  width: 1440px;
+  height: 80px;
+  background-color: transparent;
+  border-color: rgba(196, 196, 196, 0.01);
+}
+
+.navigation__logo {
+  width: 200px;
+  height: 24px;
+  margin: 30px 104px;
+}
+
+.navigation__list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 42px;
+  padding-right: 104px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.navigation__link,
+.navigation__link:visited,
+.navigation__link:hover,
+.navigation__link:active {
+  color: white;
+  text-decoration: none;
+}
+
+.navigation__button {
+  width: 176px;
+  height: 48px;
+  border-radius: 100px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}

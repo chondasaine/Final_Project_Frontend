@@ -21,7 +21,6 @@ function App() {
             element={
               <>
                 <Main />
-                <SearchForm />
                 <Preloader />
                 <NewsCardList />
                 <About />

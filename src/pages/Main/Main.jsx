@@ -1,6 +1,5 @@
 import "./Main.css";
 import { Link } from "react-router-dom";
-import mainImage from "../../assets/mainImage.png";
 import NewsCardList from "../../components/NewsCardList/NewsCardList";
 import Preloader from "../../components/Preloader/Preloader";
 import SearchForm from "../../components/SearchForm/SearchForm";
@@ -10,13 +9,7 @@ function Main() {
   return (
     <main className="main">
       <section className="main__banner-section">
-        <Link to="/">
-          <img
-            src={mainImage}
-            alt="main banner image"
-            className="main__banner"
-          />
-        </Link>
+        <Link to="/"></Link>
       </section>
 
       <section className="main__search-section">
