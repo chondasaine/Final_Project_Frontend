@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../../assets/roboto-400-regular.woff") format("woff");
+}
+
+.footer {
+  height: 80px;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+}
+
+.footer-info {
+  margin: 32px 104px 26px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.footer-url {
+  display: flex;
+  margin-left: auto;
+  margin-right: 104px;
+  list-style: none;
+  padding: 0;
+}
+
+.footer-link {
+  margin-top: 30px;
+  margin-bottom: 26px;
+  margin-left: 40px;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.footer-icon {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 24px;
+  margin-left: 24px;
+}

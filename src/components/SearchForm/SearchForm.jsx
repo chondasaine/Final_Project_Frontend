@@ -9,21 +9,23 @@ function SearchForm() {
           Find the latest news on any topic and save them in your personal
           account.
         </h3>
-        <input
-          id="search-bar"
-          name="news-query"
-          type="text"
-          className="search__input"
-          placeholder="Enter topic"
-          required
-        />
-        <button
-          type="submit"
-          id="search-button"
-          className="search__submit-button"
-        >
-          Search
-        </button>
+        <div className="search__field-wrapper">
+          <input
+            id="search-bar"
+            name="news-query"
+            type="text"
+            className="search__input"
+            placeholder="Enter topic"
+            required
+          />
+          <button
+            type="submit"
+            id="search-button"
+            className="search__submit-button"
+          >
+            Search
+          </button>
+        </div>
       </form>
     </section>
   );

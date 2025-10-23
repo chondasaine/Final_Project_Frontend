@@ -1,4 +1,9 @@
-.main__banner {
-  max-width: 1440px;
+.hero {
   height: 576px;
+  padding-bottom: 88px;
+  background-image: url("../../assets/mainImage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
