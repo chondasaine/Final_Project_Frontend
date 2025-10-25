@@ -1,6 +1,17 @@
+import { useState } from "react";
 import "./SearchForm.css";
 
-function SearchForm() {
+function SearchForm({ onSearch }) {
+  const [query, setQuery] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const cleanQuery = query.trim();
+    if (cleanQuery) {
+      onSearch(cleanQuery);
+    }
+  };
+
   return (
     <section className="search-section">
       <form className="search-form" aria-label="Search news articles">
@@ -16,7 +27,8 @@ function SearchForm() {
             type="text"
             className="search__input"
             placeholder="Enter topic"
-            required
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
           <button
             type="submit"

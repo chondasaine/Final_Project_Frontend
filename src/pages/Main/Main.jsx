@@ -6,7 +6,27 @@ import Preloader from "../../components/Preloader/Preloader";
 import NewsCardList from "../../components/NewsCardList/NewsCardList";
 import About from "../../components/About/About";
 
+import { useState } from "react";
+import { fetchArticles } from "../../utils/api";
+
 function Main() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSearch = async (query) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const results = await fetchArticles(query);
+      setArticles(results);
+    } catch (err) {
+      setError("Failed to fetch artcles. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="main">
       <section className="main__banner-section">
@@ -17,16 +37,23 @@ function Main() {
         <div className="hero">
           <div className="page__content">
             <Header />
-            <SearchForm />
+            <SearchForm onSearch={handleSearch} />
           </div>
         </div>
       </section>
 
       <section className="main__results-section">
-        <Preloader />
-        <NewsCardList />
+        {loading && <Preloader />}
+        {error && <p className="error-message">{error}</p>}
+        {!loading && articles.length > 0 && (
+          <NewsCardList articles={articles} />
+        )}
+        {!loading && articles.length === 0 && !error && (
+          <p className="no-results-message">
+            No articles found. Try a different search.
+          </p>
+        )}
       </section>
-
       <section className="main__about-section">
         <About />
       </section>
