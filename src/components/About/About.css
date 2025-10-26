@@ -20,6 +20,16 @@
   line-height: 46px;
 }
 
+.author-placeholder {
+  width: 464px;
+  height: 464px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  border-color: rgba(148, 148, 148, 1);
+  display: block;
+}
+
 .author-info {
   padding-left: 56px;
   margin: 24px 216px 0 0;

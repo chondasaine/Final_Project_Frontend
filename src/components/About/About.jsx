@@ -1,13 +1,13 @@
 import "./About.css";
-import aboutplaceholder from "../../assets/aboutplaceholder.png";
+import chondaPhoto from "../../assets/ActaHeadShot3.png";
 
 function About() {
   return (
     <section className="about">
       <div className="author-image">
         <img
-          src={aboutplaceholder}
-          alt="Author image placeholder"
+          src={chondaPhoto}
+          alt="Chonda's photo"
           className="author-placeholder"
         />
       </div>

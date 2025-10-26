@@ -14,7 +14,11 @@ function SearchForm({ onSearch }) {
 
   return (
     <section className="search-section">
-      <form className="search-form" aria-label="Search news articles">
+      <form
+        className="search-form"
+        aria-label="Search news articles"
+        onSubmit={handleSubmit}
+      >
         <h1 className="search__header">What's going on in the world?</h1>
         <h3 className="search__content">
           Find the latest news on any topic and save them in your personal

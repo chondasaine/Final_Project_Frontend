@@ -17,8 +17,6 @@ function App() {
             element={
               <>
                 <Main />
-                <Preloader />
-                <NewsCardList />
               </>
             }
           ></Route>

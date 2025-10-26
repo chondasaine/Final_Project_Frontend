@@ -13,10 +13,12 @@ function Main() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (query) => {
     setLoading(true);
     setError(null);
+    setHasSearched(true);
     try {
       const results = await fetchArticles(query);
       setArticles(results);
@@ -41,17 +43,17 @@ function Main() {
           </div>
         </div>
       </section>
-
       <section className="main__results-section">
         {loading && <Preloader />}
+
         {error && <p className="error-message">{error}</p>}
+
         {!loading && articles.length > 0 && (
           <NewsCardList articles={articles} />
         )}
-        {!loading && articles.length === 0 && !error && (
-          <p className="no-results-message">
-            No articles found. Try a different search.
-          </p>
+
+        {!loading && hasSearched && articles.length === 0 && !error && (
+          <Preloader noResults={true} />
         )}
       </section>
       <section className="main__about-section">

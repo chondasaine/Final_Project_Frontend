@@ -3,7 +3,10 @@
   src: url("../../assets/roboto-slab-400-regular.woff") format("woff");
 
   font-family: "Roboto";
-  src: url("../../assets/roboto-slab-500.woff") format("woff");
+  src: url("../../assets/roboto-400.woff") format("woff");
+
+  font-family: "Roboto";
+  src: url("../../assets/roboto-500.woff") format("woff");
 }
 
 .search-form {
@@ -46,6 +49,10 @@
   border: 1px solid #ccc;
   padding: 0 180px 0 24px;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
 }
 
 .search__input::placeholder {

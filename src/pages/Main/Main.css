@@ -1,9 +1,17 @@
 .hero {
-  height: 576px;
+  min-height: 576px;
   padding-bottom: 88px;
   background-image: url("../../assets/mainImage.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+}
+
+.main__search-section {
+  margin-bottom: 0;
+}
+
+.main__results-section {
+  margin-top: 0;
 }
