@@ -14,6 +14,7 @@ function Main() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
+  const [visibleCount, setvisibleCount] = useState(3);
 
   const handleSearch = async (query) => {
     setLoading(true);
@@ -49,9 +50,12 @@ function Main() {
         {error && <p className="error-message">{error}</p>}
 
         {!loading && articles.length > 0 && (
-          <NewsCardList articles={articles} />
+          <NewsCardList
+            articles={articles.slice(0, visibleCount)}
+            onShowMore={() => setvisibleCount((prev) => prev + 3)}
+            showMoreVisible={visibleCount < articles.length}
+          />
         )}
-
         {!loading && hasSearched && articles.length === 0 && !error && (
           <Preloader noResults={true} />
         )}

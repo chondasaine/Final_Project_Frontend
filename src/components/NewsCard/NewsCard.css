@@ -77,3 +77,9 @@
   line-height: 20px;
   color: rgba(182, 188, 191, 1);
 }
+
+@media (max-width: 767px) {
+  .news-card-list {
+    padding: 0 16px;
+  }
+}

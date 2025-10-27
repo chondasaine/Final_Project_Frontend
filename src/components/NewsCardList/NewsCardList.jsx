@@ -1,7 +1,7 @@
 import NewsCard from "../NewsCard/NewsCard";
 import "./NewsCardList.css";
 
-function NewsCardList({ articles }) {
+function NewsCardList({ articles, onShowMore, showMoreVisible }) {
   return (
     <section className="news-card-list">
       <h1 className="news-card-list__section-title">Search Results</h1>
@@ -10,9 +10,16 @@ function NewsCardList({ articles }) {
           <NewsCard key={index} article={article} />
         ))}
       </div>
-      <div className="news-card__show-more-wrapper">
-        <button className="news-card-list__show-more-button">Show More</button>
-      </div>
+      {showMoreVisible && (
+        <div className="news-card__show-more-wrapper">
+          <button
+            className="news-card-list__show-more-button"
+            onClick={onShowMore}
+          >
+            Show More
+          </button>
+        </div>
+      )}
     </section>
   );
 }

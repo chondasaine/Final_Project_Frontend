@@ -1,6 +1,9 @@
 @font-face {
   font-family: "Roboto";
   src: url("../../assets/roboto-500.woff") format("woff");
+
+  font-family: "Roboto Slab";
+  src: url("../../assets/roboto-slab-700.woff") format("woff");
 }
 
 .navigation {
@@ -16,6 +19,10 @@
   width: 200px;
   height: 24px;
   margin: 30px 104px;
+  font-family: "Roboto Slab", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .navigation__list {
@@ -35,12 +42,30 @@
   text-decoration: none;
 }
 
-.navigation__link,
-.navigation__link:visited,
-.navigation__link:hover,
-.navigation__link:active {
+.navigation__link {
+  position: relative;
   color: white;
   text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.navigation__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -23px;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navigation__link:hover::after {
+  opacity: 1;
 }
 
 .navigation__button {
@@ -50,4 +75,27 @@
   background-color: transparent;
   border: 1px solid white;
   color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .navigation {
+    height: 66px;
+  }
+
+  .navigation__logo {
+    margin: 22.73px 0 18.47px 40px;
+  }
+
+  .navigation__link {
+    font-size: 16px;
+  }
+
+  .navigation__button {
+    font-size: 16px;
+    margin: 14px 0 12px 40px;
+  }
 }
