@@ -3,12 +3,14 @@ import "./SearchForm.css";
 
 function SearchForm({ onSearch }) {
   const [query, setQuery] = useState("");
+  const [clicked, setClicked] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const cleanQuery = query.trim();
     if (cleanQuery) {
       onSearch(cleanQuery);
+      setClicked(true);
     }
   };
 
@@ -37,7 +39,11 @@ function SearchForm({ onSearch }) {
           <button
             type="submit"
             id="search-button"
-            className="search__submit-button"
+            className={
+              clicked
+                ? "search__submit-button search__submit-button-clicked"
+                : "search__submit-button"
+            }
           >
             Search
           </button>

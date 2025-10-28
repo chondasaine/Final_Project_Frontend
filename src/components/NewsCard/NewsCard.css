@@ -2,6 +2,9 @@
   font-family: "Roboto Slab";
   src: url("../../assets/roboto-slab-400-regular.woff") format("woff");
 
+  font-family: "Roboto";
+  src: url("../../assets/roboto-500.woff") format("woff");
+
   font-family: "Inter";
   src: url("../../assets/inter-400-regular.woff") format("woff");
 }
@@ -27,6 +30,39 @@
   object-fit: cover;
   border-top-left-radius: 19px;
   border-top-right-radius: 19px;
+}
+
+.news-card__bookmark-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.news-card__error-message {
+  position: absolute;
+  width: 182px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  top: 24px;
+  right: 69px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .news-card__image--fallback {

@@ -39,6 +39,11 @@
   line-height: 24px;
   color: rgba(26, 27, 34, 1);
   background-color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.news-card-list__show-more-button:hover {
+  background-color: rgba(232, 232, 232, 1);
 }
 
 @media (max-width: 767px) {

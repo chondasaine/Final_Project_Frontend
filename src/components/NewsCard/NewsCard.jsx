@@ -1,8 +1,21 @@
 import "./NewsCard.css";
+import { useState } from "react";
 import fallbackImage from "../../assets/fallback.jpg";
+import bookmarkActive from "../../assets/bookmarkActive.svg";
+import bookmarkDefault from "../../assets/bookmarkDefault.svg";
 
-function NewsCard({ article }) {
+function NewsCard({ article, isLoggedIn, onSave, isBookmarked }) {
   const { title, description, url, image, publishedAt, source } = article;
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleBookmarkClick = () => {
+    if (!isLoggedIn) {
+      setErrorMessage("Sign in to save articles");
+      setTimeout(() => setErrorMessage(""), 3000);
+      return;
+    }
+    onSave(article);
+  };
 
   return (
     <div className="news-card-wrapper">
@@ -11,6 +24,22 @@ function NewsCard({ article }) {
         role="article"
         aria-labelledby={`title-${article.url}`}
       >
+        <button
+          className="news-card__bookmark-button"
+          onClick={handleBookmarkClick}
+          aria-label="Save article"
+        >
+          <img
+            src={isBookmarked ? bookmarkActive : bookmarkDefault}
+            alt={isBookmarked ? "Remove bookmark" : "Save article"}
+            className="bookmark-icon"
+          />
+        </button>
+        {errorMessage && (
+          <p className="news-card__error-message" aria-live="assertive">
+            {errorMessage}
+          </p>
+        )}
         <a
           href={url}
           target="_blank"

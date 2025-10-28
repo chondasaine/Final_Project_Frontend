@@ -80,6 +80,14 @@
   cursor: pointer;
 }
 
+.search__submit-button:hover {
+  background-color: rgba(52, 126, 255, 1);
+}
+
+.search__submit-button-clicked {
+  background-color: rgba(42, 101, 204, 1);
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
   .search__header {
     font-size: 36px;

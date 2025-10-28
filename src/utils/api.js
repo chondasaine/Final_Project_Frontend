@@ -25,3 +25,20 @@ export async function fetchArticles(query = "technology") {
     return [];
   }
 }
+
+export function saveArticle(article, token) {
+  return (fetch("https://api.wtwr.h4ck.me/articles"),
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(article),
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error(`Save failed: ${res.status}`);
+    }
+    return res.json();
+  });
+}
