@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("../../assets/roboto-500-regular.woff") format("woff");
+
+  font-family: "Roboto";
+  src: url("../../assets/roboto-900.woff") format("woff");
+
+  font-family: "Inter";
+  src: url("../../assets/inter-400-regular.woff") format("woff");
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  visibility: hidden;
+}
+
+.modal__content {
+  position: relative;
+  max-width: 430px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+  padding: 36px;
+}
+
+.modal__opened {
+  visibility: visible;
+}
+
+.modal__close {
+  position: absolute;
+  margin: -140px 410px 500px;
+  width: 40px;
+  height: 40px;
+  background-image: url("../../../assets/close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.modal__title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  margin: 0 0 22px 0;
+}
+
+.modal__form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__label {
+  margin-bottom: 9px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: rgba(47, 113, 229, 1);
+}
+
+.modal__input {
+  display: block;
+  margin-bottom: 31px;
+  width: 358px;
+  height: 47px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.modal__input::placeholder {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.modal__button {
+  margin-top: 8px;
+  width: 358px;
+  height: 64px;
+  border-radius: 100px;
+  background-color: rgba(230, 232, 232, 1);
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(182, 188, 191, 1);
+}
+
+.modal__button-secondary {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  margin-top: 16px;
+  border: none;
+  background-color: transparent;
+}
+
+.modal__link {
+  color: rgba(47, 113, 229, 1);
+}
+
+.modal__error {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: rgba(255, 0, 0, 1);
+}

@@ -8,8 +8,9 @@ import About from "../../components/About/About";
 
 import { useState } from "react";
 import { fetchArticles } from "../../utils/api";
+import ModalWithForm from "../../components/modals/ModalWithForm/ModalWithForm";
 
-function Main() {
+function Main({ onSubmit, onOpenModal, onCloseModal, isModalOpen }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,7 +25,7 @@ function Main() {
       const results = await fetchArticles(query);
       setArticles(results);
     } catch (err) {
-      setError("Failed to fetch artcles. Please try again.");
+      setError("Failed to fetch articles. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -39,8 +40,9 @@ function Main() {
       <section className="main__search-section">
         <div className="hero">
           <div className="page__content">
-            <Header />
+            <Header onOpenModal={onOpenModal} />
             <SearchForm onSearch={handleSearch} />
+            <ModalWithForm />
           </div>
         </div>
       </section>

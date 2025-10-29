@@ -1,10 +1,10 @@
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header({ onOpenModal }) {
   return (
     <header className="header" role="banner">
-      <Navigation />
+      <Navigation onOpenModal={onOpenModal} />
       <div className="header__container"></div>
     </header>
   );
