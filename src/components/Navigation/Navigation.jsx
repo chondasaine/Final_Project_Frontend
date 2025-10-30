@@ -2,7 +2,7 @@ import "./Navigation.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/NewsExplorerlogo.svg";
 
-function Navigation({ onOpenModal }) {
+function Navigation({ onOpenLoginModal }) {
   return (
     <nav className="navigation" aria-label="Main navigation">
       <Link to="/">
@@ -17,7 +17,7 @@ function Navigation({ onOpenModal }) {
         <li>
           <button
             type="button"
-            onClick={onOpenModal}
+            onClick={onOpenLoginModal}
             className="navigation__button"
           >
             Sign in

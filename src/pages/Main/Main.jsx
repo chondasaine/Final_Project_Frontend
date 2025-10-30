@@ -10,7 +10,7 @@ import { useState } from "react";
 import { fetchArticles } from "../../utils/api";
 import ModalWithForm from "../../components/modals/ModalWithForm/ModalWithForm";
 
-function Main({ onSubmit, onOpenModal, onCloseModal, isModalOpen }) {
+function Main({ onSubmit, onOpenLoginModal, onCloseModal }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -40,9 +40,8 @@ function Main({ onSubmit, onOpenModal, onCloseModal, isModalOpen }) {
       <section className="main__search-section">
         <div className="hero">
           <div className="page__content">
-            <Header onOpenModal={onOpenModal} />
+            <Header onOpenLoginModal={onOpenLoginModal} />
             <SearchForm onSearch={handleSearch} />
-            <ModalWithForm />
           </div>
         </div>
       </section>

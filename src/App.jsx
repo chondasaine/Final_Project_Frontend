@@ -6,12 +6,16 @@ import { saveArticle } from "./utils/api";
 import NewsCardList from "./components/NewsCardList/NewsCardList";
 import RegisterModal from "./components/modals/RegisterModal/RegisterModal";
 import Footer from "./components/Footer/Footer";
+import LoginModal from "./components/modals/LoginModal/LoginModal";
+import { registerUser, loginUser } from "./utils/auth";
 
 function App() {
   const [savedArticles, setSavedArticles] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeModal, setActiveModal] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const handleSaveArticle = (article) => {
     const token = localStorage.getItem("jwt");
@@ -27,16 +31,43 @@ function App() {
       });
   };
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const handleOpenLoginModal = () => setIsLoginModalOpen(true);
+  const handleOpenRegisterModal = () => setIsRegisterModalOpen(true);
+  const handleCloseModal = () => {
+    setIsLoginModalOpen(false);
+    setIsRegisterModalOpen(false);
   };
 
-  const handleCloseModal = () => setIsModalOpen(false);
+  const handleLoginSubmit = async ({ email, password }) => {
+    try {
+      const userData = await loginUser({ email, password });
+      setIsLoggedIn(true);
+      setCurrentUser(userData);
+      handleCloseModal();
+    } catch (err) {
+      console.error("Login failed:", err.message);
+    }
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // handle form data (e.g., login or register)
-    handleCloseModal();
+  const handleRegisterSubmit = async ({ userName, email, password }) => {
+    try {
+      const userData = await registerUser({ userName, email, password });
+      setIsLoggedIn(true);
+      setCurrentUser(userData);
+      handleCloseModal();
+    } catch (err) {
+      console.error("Registration failed:", err.message);
+    }
+  };
+
+  const handleSwitchToRegister = () => {
+    setIsLoginModalOpen(false);
+    setIsRegisterModalOpen(true);
+  };
+
+  const handleSwitchToLogin = () => {
+    setIsLoginModalOpen(true);
+    setIsRegisterModalOpen(false);
   };
 
   return (
@@ -48,10 +79,10 @@ function App() {
             element={
               <>
                 <Main
-                  onOpenModal={handleOpenModal}
+                  onOpenLoginModal={handleOpenLoginModal}
+                  onOpenRegisterModal={handleOpenRegisterModal}
                   onCloseModal={handleCloseModal}
-                  isModalOpen={isModalOpen}
-                  onSubmit={handleSubmit}
+                  isLoginModalOpen={isLoginModalOpen}
                 />
               </>
             }
@@ -67,10 +98,23 @@ function App() {
             }
           ></Route>
         </Routes>
-        <RegisterModal
-          isOpen={isModalOpen}
-          handleCloseModal={handleCloseModal}
-        />
+        {isLoginModalOpen && (
+          <LoginModal
+            isOpen={isLoginModalOpen}
+            handleCloseModal={handleCloseModal}
+            onLogin={handleLoginSubmit}
+            handleSwitchToRegister={handleSwitchToRegister}
+          />
+        )}
+        {isRegisterModalOpen && (
+          <RegisterModal
+            isOpen={isRegisterModalOpen}
+            handleCloseModal={handleCloseModal}
+            onRegister={handleRegisterSubmit}
+            handleSwitchToLogin={handleSwitchToLogin}
+          />
+        )}
+
         <Footer />
       </div>
     </div>

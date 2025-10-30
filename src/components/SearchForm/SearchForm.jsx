@@ -5,7 +5,7 @@ function SearchForm({ onSearch }) {
   const [query, setQuery] = useState("");
   const [clicked, setClicked] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSearchSubmit = (e) => {
     e.preventDefault();
     const cleanQuery = query.trim();
     if (cleanQuery) {
@@ -19,7 +19,7 @@ function SearchForm({ onSearch }) {
       <form
         className="search-form"
         aria-label="Search news articles"
-        onSubmit={handleSubmit}
+        onSubmit={handleSearchSubmit}
       >
         <h1 className="search__header">What's going on in the world?</h1>
         <h3 className="search__content">

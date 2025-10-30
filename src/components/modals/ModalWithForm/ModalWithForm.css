@@ -33,7 +33,8 @@
 
 .modal__close {
   position: absolute;
-  margin: -140px 410px 500px;
+  top: -47px;
+  right: -46px;
   width: 40px;
   height: 40px;
   background-image: url("../../../assets/close.svg");
@@ -87,10 +88,10 @@
 
 .modal__button {
   margin-top: 8px;
-  width: 358px;
+  width: 360px;
   height: 64px;
   border-radius: 100px;
-  background-color: rgba(230, 232, 232, 1);
+  background-color: rgba(230, 232, 235, 1);
   border: none;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
@@ -109,6 +110,11 @@
   background-color: transparent;
 }
 
+.modal__button:disabled {
+  background-color: rgba(230, 232, 235, 1);
+  cursor: not-allowed;
+}
+
 .modal__link {
   color: rgba(47, 113, 229, 1);
 }
@@ -119,4 +125,6 @@
   font-size: 12px;
   line-height: 100%;
   color: rgba(255, 0, 0, 1);
+  margin-top: 10px;
+  display: block;
 }

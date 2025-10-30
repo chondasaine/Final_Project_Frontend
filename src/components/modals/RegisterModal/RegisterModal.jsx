@@ -6,7 +6,6 @@ function RegisterModal({
   isOpen,
   handleCloseModal,
   onRegister,
-  onSubmit,
   handleSwitchToLogin,
 }) {
   const [email, setEmail] = useState("");
@@ -43,7 +42,7 @@ function RegisterModal({
     setUserName("");
   }, [isOpen]);
 
-  const handleSubmit = (e) => {
+  const handleRegisterFormSubmit = (e) => {
     e.preventDefault();
     let hasError = false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -77,7 +76,7 @@ function RegisterModal({
       title="Sign up"
       isOpen={isOpen}
       handleCloseModal={handleCloseModal}
-      onSubmit={handleSubmit}
+      onSubmit={handleRegisterFormSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email
@@ -118,14 +117,14 @@ function RegisterModal({
         {userNameError && <span className="modal__error">{userNameError}</span>}
       </label>
       <button type="submit" className="modal__button">
-        Sign in
+        Sign up
       </button>
       <button
         type="button"
         className="modal__button-secondary"
         onClick={handleSwitchToLogin}
       >
-        or <span className="modal__link">Sign up</span>
+        or <span className="modal__link">Sign in</span>
       </button>
     </ModalWithForm>
   );
