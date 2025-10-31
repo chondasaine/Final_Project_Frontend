@@ -1,10 +1,12 @@
 @font-face {
   font-family: "Roboto Slab";
   src: url("../../assets/roboto-500-regular.woff") format("woff");
-
+}
+@font-face {
   font-family: "Roboto";
   src: url("../../assets/roboto-900.woff") format("woff");
-
+}
+@font-face {
   font-family: "Inter";
   src: url("../../assets/inter-400-regular.woff") format("woff");
 }
@@ -60,6 +62,7 @@
 }
 
 .modal__label {
+  position: relative;
   margin-bottom: 9px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -91,13 +94,13 @@
   width: 360px;
   height: 64px;
   border-radius: 100px;
-  background-color: rgba(230, 232, 235, 1);
+  background-color: rgba(47, 113, 229, 1);
   border: none;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
-  color: rgba(182, 188, 191, 1);
+  color: rgba(255, 255, 255, 1);
 }
 
 .modal__button-secondary {
@@ -112,6 +115,7 @@
 
 .modal__button:disabled {
   background-color: rgba(230, 232, 235, 1);
+  color: rgba(182, 188, 191, 1);
   cursor: not-allowed;
 }
 
@@ -120,11 +124,13 @@
 }
 
 .modal__error {
+  position: absolute;
+  top: 65px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 100%;
   color: rgba(255, 0, 0, 1);
-  margin-top: 10px;
+  margin: 10px 0 13px 0;
   display: block;
 }

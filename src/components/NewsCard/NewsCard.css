@@ -1,10 +1,12 @@
 @font-face {
   font-family: "Roboto Slab";
   src: url("../../assets/roboto-slab-400-regular.woff") format("woff");
-
+}
+@font-face {
   font-family: "Roboto";
   src: url("../../assets/roboto-500.woff") format("woff");
-
+}
+@font-face {
   font-family: "Inter";
   src: url("../../assets/inter-400-regular.woff") format("woff");
 }

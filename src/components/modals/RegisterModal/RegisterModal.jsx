@@ -78,7 +78,7 @@ function RegisterModal({
       handleCloseModal={handleCloseModal}
       onSubmit={handleRegisterFormSubmit}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="register-email" className="modal__label">
         Email
         <input
           id="register-email"
@@ -91,7 +91,7 @@ function RegisterModal({
         />
         {emailError && <span className="modal__error">{emailError}</span>}
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="register-password" className="modal__label">
         Password
         <input
           id="register-password"

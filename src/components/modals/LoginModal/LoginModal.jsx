@@ -74,7 +74,7 @@ function LoginModal({
       handleCloseModal={handleCloseModal}
       onSubmit={handleLoginFormSubmit}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="login-email" className="modal__label">
         Email
         <input
           id="login-email"
@@ -93,7 +93,7 @@ function LoginModal({
           </span>
         )}
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="login-password" className="modal__label">
         Password
         <input
           id="rlogin-password"
