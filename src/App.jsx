@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "./pages/Main/Main";
-import { saveArticle } from "./utils/api";
-import NewsCardList from "./components/NewsCardList/NewsCardList";
 import RegisterModal from "./components/modals/RegisterModal/RegisterModal";
 import Footer from "./components/Footer/Footer";
 import LoginModal from "./components/modals/LoginModal/LoginModal";
-import { registerUser, loginUser } from "./utils/auth";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import SavedNewsPage from "./pages/SavedNewsPage/SavedNewsPage";
+import {
+  fakeRegisterUser,
+  fakeLoginUser,
+  fakeSaveBookmark,
+  removeFakeSaveBookmark,
+  getFakeBookmarks,
+} from "./utils/mockApi";
 
 function App() {
   const [savedArticles, setSavedArticles] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [activeModal, setActiveModal] = useState("");
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [token, setToken] = useState("");
 
-  const handleSaveArticle = (article) => {
+  /*const handleSaveArticle = (article) => {
     const token = localStorage.getItem("jwt");
     saveArticle(article, token)
       .then((savedArticle) => {
@@ -29,7 +39,7 @@ function App() {
       .catch((err) => {
         console.error("Save failed:", err);
       });
-  };
+  };*/
 
   const handleOpenLoginModal = () => setIsLoginModalOpen(true);
   const handleOpenRegisterModal = () => setIsRegisterModalOpen(true);
@@ -70,6 +80,58 @@ function App() {
     setIsRegisterModalOpen(false);
   };
 
+  const handleRegister = async (formData) => {
+    try {
+      const res = await fakeRegisterUser(formData);
+      setIsLoggedIn(true);
+      setUsername(formData.username);
+      setToken(res.token);
+    } catch (err) {
+      setRegisterError(err.message);
+    }
+  };
+
+  const handleLogin = async (formData) => {
+    try {
+      const res = await fakeLoginUser(formData);
+      setIsLoggedIn(true);
+      setUsername(res.username);
+      setToken(res.token);
+    } catch (err) {
+      setLoginError(err.message);
+    }
+  };
+
+  const handleSaveBookmark = async (aricle) => {
+    try {
+      const res = await fakeSaveBookmark(aricle);
+      setSavedArticles((prev) => [...prev, res.saved]);
+    } catch (err) {
+      console.error("Save failed:", err.message);
+    }
+  };
+
+  const handleRemoveBookmark = async (articleId) => {
+    try {
+      const res = await removeFakeSaveBookmark(articleId);
+      setSavedArticles((prev) =>
+        prev.filter((article) => article._id !== res.removedId)
+      );
+    } catch (err) {
+      console.error("Remove failed:", err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getFakeBookmarks().then((data) => setSavedArticles(data));
+    }
+  }, [isLoggedIn]);
+
+  const handleDelete = (id) => {
+    setSavedArticles((prev) => prev.filter((article) => article._id !== id));
+  };
+
   return (
     <div className="page">
       <div className="page__content">
@@ -90,11 +152,13 @@ function App() {
           <Route
             path="/saved-news"
             element={
-              <NewsCardList
-                savedArticles={savedArticles}
-                onSave={handleSaveArticle}
-                isLoggedIn={isLoggedIn}
-              />
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <SavedNewsPage
+                  savedArticles={savedArticles}
+                  onDelete={handleDelete}
+                  username={username}
+                />
+              </ProtectedRoute>
             }
           ></Route>
         </Routes>

@@ -14,6 +14,7 @@ function RegisterModal({
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [userNameError, setUserNameError] = useState("");
+  const [existingEmailError, setExistingEmailError] = useState("");
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
@@ -36,10 +37,17 @@ function RegisterModal({
     setUserNameError(value.trim() ? "" : "User name is required");
   };
 
+  const handleExistingEmailError = (e) => {
+    if (!email) {
+      setExistingEmailError("This email is not available");
+    }
+  };
+
   useEffect(() => {
     setEmail("");
     setPassword("");
     setUserName("");
+    setAuthError("");
   }, [isOpen]);
 
   const handleRegisterFormSubmit = (e) => {
@@ -116,16 +124,25 @@ function RegisterModal({
         />
         {userNameError && <span className="modal__error">{userNameError}</span>}
       </label>
-      <button type="submit" className="modal__button">
-        Sign up
-      </button>
-      <button
-        type="button"
-        className="modal__button-secondary"
-        onClick={handleSwitchToLogin}
-      >
-        or <span className="modal__link">Sign in</span>
-      </button>
+      <div>
+        {existingEmailError && (
+          <span className="modal__error">{existingEmailError}</span>
+        )}
+        <button
+          type="submit"
+          onClick={handleExistingEmailError}
+          className="modal__button"
+        >
+          Sign up
+        </button>
+        <button
+          type="button"
+          className="modal__button-secondary"
+          onClick={handleSwitchToLogin}
+        >
+          or <span className="modal__link">Sign in</span>
+        </button>
+      </div>
     </ModalWithForm>
   );
 }

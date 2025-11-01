@@ -1,7 +1,7 @@
-import { checkResponse } from "./checkResponse";
-import { baseUrl } from "../utils/constants";
+//import { checkResponse } from "./checkResponse";
+//import { baseUrl } from "../utils/constants";
 
-export const registerUser = ({ userName, email, password }) => {
+/*export const registerUser = ({ userName, email, password }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
@@ -29,4 +29,6 @@ export const loginUser = ({ email, password }) => {
       console.error("Login failed:", err.message);
       throw err;
     });
-};
+};*/
+
+

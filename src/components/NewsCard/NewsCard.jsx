@@ -4,7 +4,14 @@ import fallbackImage from "../../assets/fallback.jpg";
 import bookmarkActive from "../../assets/bookmarkActive.svg";
 import bookmarkDefault from "../../assets/bookmarkDefault.svg";
 
-function NewsCard({ article, isLoggedIn, onSave, isBookmarked }) {
+function NewsCard({
+  article,
+  isLoggedIn,
+  onSave,
+  isBookmarked,
+  isSavedPage,
+  onDelete,
+}) {
   const { title, description, url, image, publishedAt, source } = article;
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -24,6 +31,16 @@ function NewsCard({ article, isLoggedIn, onSave, isBookmarked }) {
         role="article"
         aria-labelledby={`title-${article.url}`}
       >
+        {isSavedPage && (
+          <div className="news-card__button-wrapper">
+            <span className="news-card__keyword-tag">{article.keyword}</span>
+            <button
+              className="news-card__delete-button"
+              onClick={() => onDelete(article._id)}
+              aria-label="Remove saved article"
+            />
+          </div>
+        )}
         <button
           className="news-card__bookmark-button"
           onClick={handleBookmarkClick}

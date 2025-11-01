@@ -26,7 +26,7 @@ export async function fetchArticles(query = "technology") {
   }
 }
 
-export function saveArticle(article, token) {
+/*export function saveArticle(article, token) {
   return (fetch("https://api.wtwr.h4ck.me/articles"),
   {
     method: "POST",
@@ -41,4 +41,6 @@ export function saveArticle(article, token) {
     }
     return res.json();
   });
-}
+}*/
+
+

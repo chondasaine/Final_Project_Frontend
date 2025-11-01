@@ -12,7 +12,6 @@ function LoginModal({
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [authError, setAuthError] = useState("");
   const isPasswordValid = password.length > 6;
 
   const handleEmailChange = (e) => {
@@ -43,7 +42,6 @@ function LoginModal({
     if (isOpen) {
       setEmail("");
       setPassword("");
-      setAuthError("");
       setEmailError("");
       setPasswordError("");
     }
@@ -109,7 +107,6 @@ function LoginModal({
             {passwordError}
           </span>
         )}
-        {authError && <span className="modal__error">{authError}</span>}
       </label>
       <button type="submit" className="modal__button" disabled={!canSubmit()}>
         Sign in

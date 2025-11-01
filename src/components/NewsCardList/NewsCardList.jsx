@@ -1,13 +1,18 @@
 import NewsCard from "../NewsCard/NewsCard";
 import "./NewsCardList.css";
 
-function NewsCardList({ articles, onShowMore, showMoreVisible }) {
+function NewsCardList({ articles, onShowMore, showMoreVisible, onDelete }) {
   return (
     <section className="news-card-list">
       <h1 className="news-card-list__section-title">Search Results</h1>
       <div className="news-card-list__grid">
         {articles.map((article, index) => (
-          <NewsCard key={index} article={article} />
+          <NewsCard
+            key={index}
+            article={article}
+            isSavedPage={true}
+            onDelete={onDelete}
+          />
         ))}
       </div>
       {showMoreVisible && (
