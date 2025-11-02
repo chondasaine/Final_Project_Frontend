@@ -26,6 +26,7 @@ function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState("");
+  const [registerError, setRegisterError] = useState("");
 
   /*const handleSaveArticle = (article) => {
     const token = localStorage.getItem("jwt");
@@ -50,7 +51,7 @@ function App() {
 
   const handleLoginSubmit = async ({ email, password }) => {
     try {
-      const userData = await loginUser({ email, password });
+      const userData = await fakeLoginUser({ email, password });
       setIsLoggedIn(true);
       setCurrentUser(userData);
       handleCloseModal();
@@ -61,12 +62,13 @@ function App() {
 
   const handleRegisterSubmit = async ({ userName, email, password }) => {
     try {
-      const userData = await registerUser({ userName, email, password });
+      const userData = await fakeRegisterUser({ userName, email, password });
       setIsLoggedIn(true);
-      setCurrentUser(userData);
+      setCurrentUser({ username: userName, email });
+      setRegisterError("");
       handleCloseModal();
     } catch (err) {
-      console.error("Registration failed:", err.message);
+      setRegisterError(err.message);
     }
   };
 
@@ -132,6 +134,13 @@ function App() {
     setSavedArticles((prev) => prev.filter((article) => article._id !== id));
   };
 
+  const handleLogOut = () => {
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    setToken("");
+    setSavedArticles([]);
+  };
+
   return (
     <div className="page">
       <div className="page__content">
@@ -145,6 +154,9 @@ function App() {
                   onOpenRegisterModal={handleOpenRegisterModal}
                   onCloseModal={handleCloseModal}
                   isLoginModalOpen={isLoginModalOpen}
+                  currentUser={currentUser}
+                  isLoggedIn={isLoggedIn}
+                  handleLogOut={handleLogOut}
                 />
               </>
             }
@@ -176,6 +188,7 @@ function App() {
             handleCloseModal={handleCloseModal}
             onRegister={handleRegisterSubmit}
             handleSwitchToLogin={handleSwitchToLogin}
+            registerError={registerError}
           />
         )}
 

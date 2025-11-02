@@ -16,6 +16,12 @@ const fakeUsers = [
     password: "Test3@1234",
     username: "testuser3",
   },
+
+  {
+    email: "chonda.saine@gmail.com",
+    password: "Test@1234",
+    username: "Chonda",
+  },
 ];
 
 let bookmarks = [];

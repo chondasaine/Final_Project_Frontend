@@ -31,27 +31,31 @@ function NewsCard({
         role="article"
         aria-labelledby={`title-${article.url}`}
       >
-        {isSavedPage && (
-          <div className="news-card__button-wrapper">
+        <div className="news-card__button-wrapper">
+          {isSavedPage && isLoggedIn && article.keyword && (
             <span className="news-card__keyword-tag">{article.keyword}</span>
+          )}
+
+          {isSavedPage && isLoggedIn ? (
             <button
               className="news-card__delete-button"
               onClick={() => onDelete(article._id)}
               aria-label="Remove saved article"
             />
-          </div>
-        )}
-        <button
-          className="news-card__bookmark-button"
-          onClick={handleBookmarkClick}
-          aria-label="Save article"
-        >
-          <img
-            src={isBookmarked ? bookmarkActive : bookmarkDefault}
-            alt={isBookmarked ? "Remove bookmark" : "Save article"}
-            className="bookmark-icon"
-          />
-        </button>
+          ) : (
+            <button
+              className="news-card__bookmark-button"
+              onClick={handleBookmarkClick}
+              aria-label="Save article"
+            >
+              <img
+                src={isBookmarked ? bookmarkActive : bookmarkDefault}
+                alt={isBookmarked ? "Remove bookmark" : "Save article"}
+                className="bookmark-icon"
+              />
+            </button>
+          )}
+        </div>
         {errorMessage && (
           <p className="news-card__error-message" aria-live="assertive">
             {errorMessage}

@@ -12,6 +12,7 @@ function LoginModal({
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [signInError, setSignInError] = useState("");
   const isPasswordValid = password.length > 6;
 
   const handleEmailChange = (e) => {
@@ -23,7 +24,7 @@ function LoginModal({
     } else {
       setEmailError("");
     }
-    setAuthError("");
+    setSignInError("");
   };
 
   const handlePasswordChange = (e) => {
@@ -35,7 +36,7 @@ function LoginModal({
     } else {
       setPasswordError("");
     }
-    setAuthError("");
+    setSignInError("");
   };
 
   useEffect(() => {
@@ -44,6 +45,7 @@ function LoginModal({
       setPassword("");
       setEmailError("");
       setPasswordError("");
+      setSignInError("");
     }
   }, [isOpen]);
 
@@ -56,13 +58,16 @@ function LoginModal({
     );
   }
 
-  const handleLoginFormSubmit = (e) => {
+  const handleLoginFormSubmit = async (e) => {
     e.preventDefault();
-    setAuthError("");
-    onLogin({ email, password }).catch((err) => {
-      console.error("Login error:", err);
-      setAuthError("Email or password is incorrect");
-    });
+    setSignInError("");
+
+    try {
+      await onLogin({ email, password });
+    } catch (err) {
+      console.error("Login failed:", err.message);
+      setSignInError("Email or password is incorrect");
+    }
   };
 
   return (
@@ -86,7 +91,12 @@ function LoginModal({
           aria-describedby="email-error"
         />
         {emailError && (
-          <span id="email-error" className="modal__error">
+          <span
+            id="email-error"
+            className="modal__error"
+            role="alert"
+            aria-live="assertive"
+          >
             {emailError}
           </span>
         )}
@@ -94,30 +104,44 @@ function LoginModal({
       <label htmlFor="login-password" className="modal__label">
         Password
         <input
-          id="rlogin-password"
+          id="login-password"
           type="password"
           className="modal__input"
           placeholder="Enter password"
           required
           value={password}
           onChange={handlePasswordChange}
+          aria-invalid={!!passwordError}
+          aria-describedby="password-error"
         />
         {passwordError && (
-          <span id="password-error" className="modal__error">
+          <span
+            id="password-error"
+            className="modal__error"
+            role="alert"
+            aria-live="assertive"
+          >
             {passwordError}
           </span>
         )}
       </label>
-      <button type="submit" className="modal__button" disabled={!canSubmit()}>
-        Sign in
-      </button>
-      <button
-        type="button"
-        className="modal__button-secondary"
-        onClick={handleSwitchToRegister}
-      >
-        or <span className="modal__link">Sign up</span>
-      </button>
+      <div className="modal__action">
+        {signInError && (
+          <span className="modal__error" role="alert" aria-live="assertive">
+            {signInError}
+          </span>
+        )}
+        <button type="submit" className="modal__button" disabled={!canSubmit()}>
+          Sign in
+        </button>
+        <button
+          type="button"
+          className="modal__button-secondary"
+          onClick={handleSwitchToRegister}
+        >
+          or <span className="modal__link">Sign up</span>
+        </button>
+      </div>
     </ModalWithForm>
   );
 }
