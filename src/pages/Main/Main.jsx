@@ -10,7 +10,14 @@ import { useState } from "react";
 import { fetchArticles } from "../../utils/api";
 import ModalWithForm from "../../components/modals/ModalWithForm/ModalWithForm";
 
-function Main({ onOpenLoginModal, currentUser, isLoggedIn, handleLogOut }) {
+function Main({
+  onOpenLoginModal,
+  currentUser,
+  isLoggedIn,
+  handleLogOut,
+  onBookmark,
+  savedArticles,
+}) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -62,6 +69,8 @@ function Main({ onOpenLoginModal, currentUser, isLoggedIn, handleLogOut }) {
             showMoreVisible={visibleCount < articles.length}
             isSavedPage={false}
             isLoggedIn={isLoggedIn}
+            onBookmark={onBookmark}
+            savedArticles={savedArticles}
           />
         )}
         {!loading && hasSearched && articles.length === 0 && !error && (

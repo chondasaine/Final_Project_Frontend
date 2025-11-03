@@ -7,7 +7,7 @@ import bookmarkDefault from "../../assets/bookmarkDefault.svg";
 function NewsCard({
   article,
   isLoggedIn,
-  onSave,
+  onBookmark,
   isBookmarked,
   isSavedPage,
   onDelete,
@@ -16,12 +16,13 @@ function NewsCard({
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleBookmarkClick = () => {
+    console.log("Bookmark clicked:", article.title);
     if (!isLoggedIn) {
       setErrorMessage("Sign in to save articles");
       setTimeout(() => setErrorMessage(""), 3000);
       return;
     }
-    onSave(article);
+    onBookmark?.(article);
   };
 
   return (

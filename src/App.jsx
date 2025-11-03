@@ -104,10 +104,30 @@ function App() {
     }
   };
 
-  const handleSaveBookmark = async (aricle) => {
+  const handleBookmark = async (article) => {
     try {
-      const res = await fakeSaveBookmark(aricle);
-      setSavedArticles((prev) => [...prev, res.saved]);
+      const alreadySaved = savedArticles.some((a) => a.url === article.url);
+      if (alreadySaved) {
+        const toRemove = savedArticles.find((a) => a.url === article.url);
+        await handleRemoveBookmark(toRemove._id);
+      } else {
+        await handleSaveBookmark(article);
+      }
+    } catch (err) {
+      console.error("Bookmark failed to save:", err.message);
+    }
+  };
+
+  const handleSaveBookmark = async (article) => {
+    try {
+      const alreadySaved = savedArticles.some((a) => a.url === article.url);
+      if (alreadySaved) return;
+
+      const res = await fakeSaveBookmark(article);
+      setSavedArticles((prev) => {
+        const updated = [...prev, res.saved];
+        return updated;
+      });
     } catch (err) {
       console.error("Save failed:", err.message);
     }
@@ -157,6 +177,8 @@ function App() {
                   currentUser={currentUser}
                   isLoggedIn={isLoggedIn}
                   handleLogOut={handleLogOut}
+                  onBookmark={handleBookmark}
+                  savedArticles={savedArticles}
                 />
               </>
             }
@@ -168,7 +190,10 @@ function App() {
                 <SavedNewsPage
                   savedArticles={savedArticles}
                   onDelete={handleDelete}
-                  username={username}
+                  username={currentUser?.username}
+                  isLoggedIn={isLoggedIn}
+                  currentUser={currentUser}
+                  handleLogOut={handleLogOut}
                 />
               </ProtectedRoute>
             }

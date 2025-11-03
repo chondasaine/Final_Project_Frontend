@@ -48,6 +48,13 @@
   align-items: center;
   border: none;
   cursor: pointer;
+  background-image: none;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.news-card__bookmark-button:hover {
+  background-image: url("../../assets/bookmarkhover.svg");
 }
 
 .news-card__error-message {
