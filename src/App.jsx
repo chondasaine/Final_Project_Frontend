@@ -7,6 +7,11 @@ import Footer from "./components/Footer/Footer";
 import LoginModal from "./components/modals/LoginModal/LoginModal";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import SavedNewsPage from "./pages/SavedNewsPage/SavedNewsPage";
+import { compareUrl } from "./utils/compareUrl";
+import {
+  fetchSavedArticlesFromLocal,
+  saveSavedArticlesToLocal,
+} from "./utils/storage";
 import {
   fakeRegisterUser,
   fakeLoginUser,
@@ -26,6 +31,7 @@ function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
 
   /*const handleSaveArticle = (article) => {
@@ -105,11 +111,14 @@ function App() {
   };
 
   const handleBookmark = async (article) => {
+    console.log("Bookmark clicked:", article);
+    if (!article?.url) return;
     try {
-      const alreadySaved = savedArticles.some((a) => a.url === article.url);
-      if (alreadySaved) {
-        const toRemove = savedArticles.find((a) => a.url === article.url);
-        await handleRemoveBookmark(toRemove._id);
+      const id = compareUrl(article.url);
+      const existing = savedArticles.find((a) => compareUrl(a.url) === id);
+
+      if (existing) {
+        await handleRemoveBookmark(existing._id);
       } else {
         await handleSaveBookmark(article);
       }
@@ -120,18 +129,23 @@ function App() {
 
   const handleSaveBookmark = async (article) => {
     try {
-      const alreadySaved = savedArticles.some((a) => a.url === article.url);
-      if (alreadySaved) return;
+      console.log("Received article:", article);
+      console.log("Received article.url:", article?.url);
+
+      if (!article?.url) return;
 
       const res = await fakeSaveBookmark(article);
+
       setSavedArticles((prev) => {
-        const updated = [...prev, res.saved];
-        return updated;
+        const id = compareUrl(article.url);
+        const exists = prev.some((a) => compareUrl(a.url) === id);
+        return exists ? prev : [...prev, res.saved];
       });
     } catch (err) {
       console.error("Save failed:", err.message);
     }
   };
+  console.log(savedArticles);
 
   const handleRemoveBookmark = async (articleId) => {
     try {
@@ -145,10 +159,51 @@ function App() {
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
-      getFakeBookmarks().then((data) => setSavedArticles(data));
+    if (!isLoggedIn) {
+      const local = fetchSavedArticlesFromLocal();
+      const seen = new Set();
+      const unique = [];
+      for (const a of local) {
+        const id = compareUrl(a?.url);
+        if (id && !seen.has(id)) {
+          seen.add(id);
+          unique.push(a);
+        }
+      }
+      setSavedArticles(unique);
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (!isLoggedIn) return;
+
+    (async () => {
+      try {
+        const serverList = await getFakeBookmarks();
+        const localList = fetchSavedArticlesFromLocal();
+        const serverById = new Map(
+          serverList.map((a) => [compareUrl(a.url), a])
+        );
+        const localById = new Map(localList.map((a) => [compareUrl(a.url), a]));
+        const missing = [];
+        for (const [id, item] of localById.entries()) {
+          if (!serverById.has(id)) missing.push(item);
+        }
+        if (missing.length) {
+          await Promise.allSettled(missing.map((a) => fakeSaveBookmark(a)));
+        }
+        const merged = await getFakeBookmarks();
+        setSavedArticles(merged);
+        saveSavedArticlesToLocal(merged);
+      } catch (err) {
+        console.error("Error merging bookmarks:", err);
+      }
+    })();
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    saveSavedArticlesToLocal(savedArticles);
+  }, [savedArticles]);
 
   const handleDelete = (id) => {
     setSavedArticles((prev) => prev.filter((article) => article._id !== id));

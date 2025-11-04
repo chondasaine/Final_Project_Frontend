@@ -1,4 +1,5 @@
 import NewsCard from "../NewsCard/NewsCard";
+import { compareUrl } from "../../utils/compareUrl";
 import "./NewsCardList.css";
 
 function NewsCardList({
@@ -18,17 +19,18 @@ function NewsCardList({
       )}
       <div className="news-card-list__grid">
         {articles.map((article) => {
+          const id = compareUrl(article?.url);
           const isBookmarked = (savedArticles || []).some(
-            (saved) => saved.url === article.url
+            (saved) => compareUrl(saved?.url) === id
           );
 
           return (
             <NewsCard
-              key={article._id || article.url}
+              key={article._id ?? id}
               article={article}
               isSavedPage={isSavedPage}
               isLoggedIn={isLoggedIn}
-              onBookmark={onBookmark}
+              onBookmark={() => onBookmark(article)}
               onDelete={onDelete}
               isBookmarked={isBookmarked}
             />

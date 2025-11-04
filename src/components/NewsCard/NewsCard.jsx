@@ -2,7 +2,8 @@ import "./NewsCard.css";
 import { useState } from "react";
 import fallbackImage from "../../assets/fallback.jpg";
 import bookmarkActive from "../../assets/bookmarkActive.svg";
-import bookmarkDefault from "../../assets/bookmarkDefault.svg";
+import bookmarkDefault from "../../assets/bookmarkhover.svg";
+import deleteDefault from "../../assets/deletedefault.svg";
 
 function NewsCard({
   article,
@@ -42,7 +43,17 @@ function NewsCard({
               className="news-card__delete-button"
               onClick={() => onDelete(article._id)}
               aria-label="Remove saved article"
-            />
+            >
+              <img
+                src={isSavedPage ? deleteDefault : deletehover}
+                alt={
+                  isSavedPage ? "Default delete button" : "Hover delete button"
+                }
+                className={`news-card__delete-icon ${
+                  isSavedPage ? "news-card__delete-icon_hover" : ""
+                }`}
+              />
+            </button>
           ) : (
             <button
               className="news-card__bookmark-button"
@@ -52,7 +63,9 @@ function NewsCard({
               <img
                 src={isBookmarked ? bookmarkActive : bookmarkDefault}
                 alt={isBookmarked ? "Remove bookmark" : "Save article"}
-                className="bookmark-icon"
+                className={`news-card__bookmark-icon ${
+                  isBookmarked ? "news-card__bookmark-icon_active" : ""
+                }`}
               />
             </button>
           )}

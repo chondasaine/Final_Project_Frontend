@@ -37,15 +37,13 @@ function SavedNewsPage({
               `, and ${keywordCount} other${keywordCount > 1 ? "s" : ""}`}
           </span>
         </p>
-
-        <ul className="saved-news__list">
-          <NewsCardList
-            articles={savedArticles}
-            isSavedPage={true}
-            isLoggedIn={isLoggedIn}
-            onDelete={onDelete}
-          />
-        </ul>
+        <NewsCardList
+          articles={savedArticles}
+          isSavedPage={true}
+          isLoggedIn={isLoggedIn}
+          onDelete={onDelete}
+          savedArticles={savedArticles}
+        />
       </section>
     </>
   );

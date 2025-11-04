@@ -15,7 +15,7 @@
 
 .saved-news__title {
   margin: 40px 0 0 104px;
-  width: 100%;
+  box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 18px;
