@@ -5,13 +5,16 @@ const BASE_URL = "https://newsapi.org/v2/everything";
 
 export async function fetchArticles(query = "technology") {
   try {
-    const response = await fetch(
-      `${BASE_URL}?q=${query}&pageSize=10&apiKey=${API_Key}`
-    );
+    const url = `${BASE_URL}?q=${encodeURIComponent(
+      query
+    )}&pageSize=10&apiKey=${API_Key}`;
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
     }
     const data = await response.json();
+    const stampedAt = new Date().toISOString();
+
     return data.articles.map((article) => ({
       url: article.url,
       title: article.title,
@@ -19,6 +22,11 @@ export async function fetchArticles(query = "technology") {
       image: article.urlToImage || fallbackImage,
       source: article.source.name,
       publishedAt: article.publishedAt,
+      _search: {
+        keyword: query,
+        query,
+        requestedAt: stampedAt,
+      },
     }));
   } catch (error) {
     console.error("Failed to fetch articles:", error);
@@ -42,5 +50,3 @@ export async function fetchArticles(query = "technology") {
     return res.json();
   });
 }*/
-
-
