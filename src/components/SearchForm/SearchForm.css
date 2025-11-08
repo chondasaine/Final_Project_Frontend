@@ -90,9 +90,17 @@
   background-color: rgba(42, 101, 204, 1);
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) {
   .search__header {
     font-size: 36px;
     line-height: 40px;
+    padding: 38px 220px 16px 163px;
+  }
+
+  .search__content {
+    font-size: 18px;
+    text-align: left;
+    margin: 0;
+    padding: 0 156px 48px 160px;
   }
 }

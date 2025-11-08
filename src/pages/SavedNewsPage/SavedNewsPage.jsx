@@ -1,5 +1,5 @@
 import "../SavedNewsPage/SavedNewsPage.css";
-import { getKeywords } from "../../utils/keywords";
+import { getTopKeywords } from "../../utils/keywords";
 import NewsCardList from "../../components/NewsCardList/NewsCardList";
 import Header from "../../components/Header/Header";
 
@@ -11,9 +11,19 @@ function SavedNewsPage({
   currentUser,
   handleLogOut,
 }) {
-  const keywords = getKeywords(savedArticles);
-  const topKeywords = keywords.slice(0, 3);
-  const keywordCount = keywords.length - topKeywords.length;
+  const { topTwoKeywords, otherCount } = getTopKeywords(savedArticles);
+
+  let keywordSummary = "";
+
+  if (topTwoKeywords.length > 0) {
+    if (otherCount === 0) {
+      keywordSummary = topTwoKeywords.join(", ");
+    } else {
+      keywordSummary = `${topTwoKeywords.join(", ")} and ${otherCount} other${
+        otherCount > 1 ? "s" : ""
+      }`;
+    }
+  }
 
   return (
     <>
@@ -29,14 +39,7 @@ function SavedNewsPage({
           {username}, you have {savedArticles.length} saved article
           {savedArticles.length !== 1 ? "s" : ""}
         </h1>
-        <p className="saved-news__keywords">
-          By keywords: {""}
-          <span className="saved-news__keywords-bold">
-            {topKeywords.join(", ")}
-            {keywordCount > 0 &&
-              `, and ${keywordCount} other${keywordCount > 1 ? "s" : ""}`}
-          </span>
-        </p>
+        <p className="saved-news__keywords">By keywords: {keywordSummary}</p>
         <NewsCardList
           articles={savedArticles}
           isSavedPage={true}

@@ -130,14 +130,10 @@
   padding-right: 12px;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .navigation {
-    height: 66px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  }
-
+@media (min-width: 768px) {
   .navigation__logo {
-    margin: 22.73px 0 18.47px 40px;
+    width: 200px;
+    height: 25px;
   }
 
   .navigation__link {
@@ -146,6 +142,9 @@
 
   .navigation__button {
     font-size: 16px;
-    margin: 14px 0 12px 40px;
+  }
+
+  .navigation__list {
+    padding: 0 0 0 8px;
   }
 }

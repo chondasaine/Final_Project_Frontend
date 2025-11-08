@@ -4,6 +4,7 @@ import fallbackImage from "../../assets/fallback.jpg";
 import bookmarkActive from "../../assets/bookmarkActive.svg";
 import bookmarkDefault from "../../assets/bookmarkhover.svg";
 import deleteDefault from "../../assets/deletedefault.svg";
+import hoverDelete from "../../assets/hoverdelete.svg";
 
 function NewsCard({
   article,
@@ -13,8 +14,14 @@ function NewsCard({
   isSavedPage,
   onDelete,
 }) {
-  const { title, description, url, image, publishedAt, source } = article;
+  const { title, description, url, image, publishedAt, source, keyword } =
+    article;
+
+  const searchKeyword =
+    article?._search?.keyword ?? article?.searchKeyword ?? "";
+
   const [errorMessage, setErrorMessage] = useState("");
+  const [isDeleteHover, setIsDeleteHover] = useState(false);
 
   const handleBookmarkClick = () => {
     console.log("Bookmark clicked:", article.title);
@@ -34,26 +41,38 @@ function NewsCard({
         aria-labelledby={`title-${article.url}`}
       >
         <div className="news-card__button-wrapper">
-          {isSavedPage && isLoggedIn && article.keyword && (
-            <span className="news-card__keyword-tag">{article.keyword}</span>
-          )}
-
           {isSavedPage && isLoggedIn ? (
-            <button
-              className="news-card__delete-button"
-              onClick={() => onDelete(article._id)}
-              aria-label="Remove saved article"
-            >
-              <img
-                src={isSavedPage ? deleteDefault : deletehover}
-                alt={
-                  isSavedPage ? "Default delete button" : "Hover delete button"
-                }
-                className={`news-card__delete-icon ${
-                  isSavedPage ? "news-card__delete-icon_hover" : ""
-                }`}
-              />
-            </button>
+            <div className="news-card__common-keywords">
+              {article.keyword && (
+                <span className="news-card__keyword-tag">
+                  {article.keyword}
+                </span>
+              )}
+
+              {searchKeyword && (
+                <p className="news-card__search-keyword">
+                  {searchKeyword.charAt(0).toUpperCase() +
+                    searchKeyword.slice(1)}
+                </p>
+              )}
+              <button
+                type="button"
+                className="news-card__delete-button"
+                onClick={() => onDelete(article._id)}
+                onMouseEnter={() => setIsDeleteHover(true)}
+                onMouseLeave={() => setIsDeleteHover(false)}
+                aria-label="Remove saved article"
+              >
+                <img
+                  src={isDeleteHover ? hoverDelete : deleteDefault}
+                  alt="Delete saved article"
+                  className="news-card__delete-icon"
+                />
+                {isDeleteHover && (
+                  <p className="news-card__delete-message">Remove from saved</p>
+                )}
+              </button>
+            </div>
           ) : (
             <button
               className="news-card__bookmark-button"
