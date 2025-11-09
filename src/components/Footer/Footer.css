@@ -18,6 +18,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
+  color: rgba(182, 188, 191, 1);
 }
 
 .footer-url {
@@ -45,4 +46,23 @@
   gap: 24px;
   margin-left: 24px;
   color: rgba(26, 27, 34, 1);
+}
+
+@media (max-width: 768px) {
+  .footer {
+  }
+  .footer-info {
+    font-size: 16px;
+    line-height: 22px;
+    margin: 24px 0 18px 40px;
+  }
+  .footer-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .footer-link {
+    font-size: 18px;
+    line-height: 24px;
+  }
 }

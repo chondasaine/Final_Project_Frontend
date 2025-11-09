@@ -12,16 +12,19 @@ function SavedNewsPage({
   handleLogOut,
 }) {
   const { topTwoKeywords, otherCount } = getTopKeywords(savedArticles);
+  const formattedKeywords = topTwoKeywords.map(
+    (kw) => kw.charAt(0).toUpperCase() + kw.slice(1).toLowerCase()
+  );
 
   let keywordSummary = "";
 
-  if (topTwoKeywords.length > 0) {
+  if (formattedKeywords.length > 0) {
     if (otherCount === 0) {
-      keywordSummary = topTwoKeywords.join(", ");
+      keywordSummary = formattedKeywords.join(", ");
     } else {
-      keywordSummary = `${topTwoKeywords.join(", ")} and ${otherCount} other${
-        otherCount > 1 ? "s" : ""
-      }`;
+      keywordSummary = `${formattedKeywords.join(
+        ", "
+      )} and ${otherCount} other${otherCount > 1 ? "s" : ""}`;
     }
   }
 
