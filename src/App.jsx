@@ -138,7 +138,9 @@ function App() {
 
       setSavedArticles((prev) => {
         const id = compareUrl(article.url);
+        console.log(id, prev);
         const exists = prev.some((a) => compareUrl(a.url) === id);
+        console.log(exists, res);
         return exists ? prev : [...prev, res.saved];
       });
     } catch (err) {
@@ -158,7 +160,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!isLoggedIn) {
       const local = fetchSavedArticlesFromLocal();
       const seen = new Set();
@@ -172,9 +174,9 @@ function App() {
       }
       setSavedArticles(unique);
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn]);*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!isLoggedIn) return;
 
     (async () => {
@@ -203,7 +205,7 @@ function App() {
 
   useEffect(() => {
     saveSavedArticlesToLocal(savedArticles);
-  }, [savedArticles]);
+  }, [savedArticles]);*/
 
   const handleDelete = (id) => {
     setSavedArticles((prev) => prev.filter((article) => article._id !== id));

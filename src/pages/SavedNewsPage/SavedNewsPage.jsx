@@ -34,12 +34,14 @@ function SavedNewsPage({
         isSavedPage={true}
       />
       <section className="saved-news">
-        <h2 className="saved-news__title">Saved articles</h2>
-        <h1 className="saved-news__heading">
-          {username}, you have {savedArticles.length} saved article
-          {savedArticles.length !== 1 ? "s" : ""}
-        </h1>
-        <p className="saved-news__keywords">By keywords: {keywordSummary}</p>
+        <div className="saved-news__header">
+          <h2 className="saved-news__title">Saved articles</h2>
+          <h1 className="saved-news__heading">
+            {username}, you have {savedArticles.length} saved article
+            {savedArticles.length !== 1 ? "s" : ""}
+          </h1>
+          <p className="saved-news__keywords">By keywords: {keywordSummary}</p>
+        </div>
         <NewsCardList
           articles={savedArticles}
           isSavedPage={true}

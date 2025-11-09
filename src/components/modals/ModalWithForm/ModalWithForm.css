@@ -1,14 +1,14 @@
 @font-face {
   font-family: "Roboto Slab";
-  src: url("../../assets/roboto-500-regular.woff") format("woff");
+  src: url("../../fonts/roboto-500-regular.woff") format("woff");
 }
 @font-face {
   font-family: "Roboto";
-  src: url("../../assets/roboto-900.woff") format("woff");
+  src: url("../../fonts/roboto-900.woff") format("woff");
 }
 @font-face {
   font-family: "Inter";
-  src: url("../../assets/inter-400-regular.woff") format("woff");
+  src: url("../../fonts/inter-400-regular.woff") format("woff");
 }
 
 .modal {

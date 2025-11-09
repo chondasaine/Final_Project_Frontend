@@ -16,9 +16,21 @@
   margin-top: 0;
 }
 
-@media (min-width: 767px) {
-  .hero img {
+@media (max-width: 768px) {
+  .hero {
     width: 100%;
+    min-height: 400px;
+    padding-bottom: 48px;
+    height: auto;
+    display: block;
+  }
+}
+
+@media (max-width: 450px) {
+  .hero {
+    width: 100%;
+    min-height: 400px;
+    padding-bottom: 48px;
     height: auto;
     display: block;
   }

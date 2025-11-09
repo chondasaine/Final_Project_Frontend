@@ -30,7 +30,7 @@ function NewsCard({
       setTimeout(() => setErrorMessage(""), 3000);
       return;
     }
-    onBookmark?.(article);
+    onBookmark(article);
   };
 
   return (
@@ -59,18 +59,16 @@ function NewsCard({
                 type="button"
                 className="news-card__delete-button"
                 onClick={() => onDelete(article._id)}
-                onMouseEnter={() => setIsDeleteHover(true)}
-                onMouseLeave={() => setIsDeleteHover(false)}
+                //onMouseEnter={() => setIsDeleteHover(true)}
+                //onMouseLeave={() => setIsDeleteHover(false)}
                 aria-label="Remove saved article"
               >
                 <img
-                  src={isDeleteHover ? hoverDelete : deleteDefault}
+                  src={hoverDelete}
                   alt="Delete saved article"
                   className="news-card__delete-icon"
                 />
-                {isDeleteHover && (
-                  <p className="news-card__delete-message">Remove from saved</p>
-                )}
+                <p className="news-card__delete-message">Remove from saved</p>
               </button>
             </div>
           ) : (
@@ -129,9 +127,9 @@ function NewsCard({
               {title}
             </h3>
             {description ? (
-              <p className="news-card__description">
+              <div className="news-card__description">
                 {description.slice(0, 120)}...
-              </p>
+              </div>
             ) : (
               <p className="news-card__description">
                 No description available.

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Roboto Slab";
-  src: url("../../assets/roboto-400-regular.woff") format("woff");
+  src: url("../../fonts/roboto-400-regular.woff") format("woff");
 }
 
 .about {
@@ -21,7 +21,7 @@
 }
 
 .author-placeholder {
-  width: 464px;
+  max-width: 464px;
   height: 464px;
   object-fit: cover;
   object-position: center top;
@@ -39,30 +39,39 @@
   line-height: 24px;
 }
 
-@media (min-width: 767px) {
-  .about {
+@media (max-width: 768px) {
+  .about__author {
+    max-width: 767px;
+    height: 354px;
     display: flex;
     align-items: center;
     text-align: center;
     gap: 24px;
-    padding: 32px 0;
   }
 
-  .about__image {
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-    border-radius: 8px;
-    padding: 61px 496px 40px;
+  .author-image {
+    width: 232px;
+    height: 232px;
+    margin-left: 40px;
   }
 
-  .about__title {
+  .author-placeholder {
+    width: 232px;
+    height: 232px;
+    margin-left: 40px;
+  }
+
+  .about-header {
+    width: 232px;
+    height: 30px;
     font-size: 24px;
-    line-height: 30px;
-    padding: 40px 40px 0;
+    line-height: 40px;
+    margin: 40px 40px 40px;
   }
 
-  .about__text {
+  .author-info {
+    width: 300px;
+    margin: 40px 40px 0;
     font-size: 16px;
     line-height: 24px;
   }

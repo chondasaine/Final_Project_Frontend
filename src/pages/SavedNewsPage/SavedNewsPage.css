@@ -1,19 +1,21 @@
 @font-face {
   font-family: "Roboto";
-  src: url("../../assets/roboto-400-regular.woff") format("woff");
+  src: url("../../fonts/roboto-400-regular.woff") format("woff");
 }
 
 @font-face {
   font-family: "Roboto Slab";
-  src: url("../../assets/roboto-slab-400-regular.woff") format("woff");
+  src: url("../../fonts/roboto-slab-400-regular.woff") format("woff");
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url("../../assets/roboto-slab-700.woff") format("woff");
+  src: url("../../fonts/roboto-slab-700.woff") format("woff");
 }
 
 .saved-news {
+}
+.saved-news__header {
   padding: 0 104px;
 }
 

@@ -1,5 +1,6 @@
 import "./Navigation.css";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import logo from "../../assets/NewsExplorerlogo.svg";
 import logoutwhite from "../../assets/logouticonwhite.svg";
 import logoutblack from "../../assets/logouticonblack.svg";
@@ -12,6 +13,7 @@ function Navigation({
   handleLogOut,
   isSavedPage,
 }) {
+  const location = useLocation();
   const navigationClass = `navigation ${isSavedPage ? "navigation_saved" : ""}`;
 
   return (
@@ -25,7 +27,12 @@ function Navigation({
       </Link>
       <ul className="navigation__list">
         <li>
-          <Link to="/" className="navigation__link">
+          <Link
+            to="/"
+            className={`navigation__link ${
+              location.pathname === "/" ? "navigation__link_active" : ""
+            }`}
+          >
             Home
           </Link>
         </li>
@@ -33,7 +40,14 @@ function Navigation({
         {isLoggedIn ? (
           <>
             <li>
-              <Link to="/saved-news" className="navigation__link">
+              <Link
+                to="/saved-news"
+                className={`navigation__link ${
+                  location.pathname === "/saved-news"
+                    ? "navigation__link_active"
+                    : ""
+                }`}
+              >
                 Saved articles
               </Link>
             </li>
