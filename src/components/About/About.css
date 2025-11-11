@@ -76,3 +76,37 @@
     line-height: 24px;
   }
 }
+
+@media (max-width: 400px) {
+  .about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .author-placeholder {
+    margin: 32px 0 24px 0;
+    display: block;
+  }
+
+  .author-image {
+    margin: 0 24px 24px 24px;
+  }
+
+  .about-header {
+    font-size: 30px;
+    line-height: 40px;
+    margin: 24px 8px 16px;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .author-info {
+    font-size: 18px;
+    line-height: 24px;
+    padding: 0;
+    margin: 0 16px 20px 16px;
+  }
+}

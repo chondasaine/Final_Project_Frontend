@@ -1,6 +1,6 @@
 .header {
   padding: 0 104px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  
 }
 
 @media (max-width: 768px) {
@@ -10,12 +10,9 @@
   }
 }
 
-@media (max-width: 450px) {
-  .hero {
-    width: 100%;
-    min-height: 400px;
-    padding-bottom: 48px;
-    height: auto;
-    display: block;
+@media (max-width: 400px) {
+  .header {
+    height: fit-content;
+    padding: 0;
   }
 }

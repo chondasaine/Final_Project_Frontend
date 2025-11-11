@@ -17,6 +17,8 @@ function Main({
   handleLogOut,
   onBookmark,
   savedArticles,
+  isLoginModalOpen,
+  handleCloseModal,
 }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -52,6 +54,8 @@ function Main({
               currentUser={currentUser}
               isLoggedIn={isLoggedIn}
               handleLogOut={handleLogOut}
+              isLoginModalOpen={isLoginModalOpen}
+              handleCloseModal={handleCloseModal}
             />
             <SearchForm onSearch={handleSearch} />
           </div>

@@ -24,7 +24,6 @@ function NewsCard({
   const [isDeleteHover, setIsDeleteHover] = useState(false);
 
   const handleBookmarkClick = () => {
-    console.log("Bookmark clicked:", article.title);
     if (!isLoggedIn) {
       setErrorMessage("Sign in to save articles");
       setTimeout(() => setErrorMessage(""), 3000);
@@ -59,8 +58,6 @@ function NewsCard({
                 type="button"
                 className="news-card__delete-button"
                 onClick={() => onDelete(article._id)}
-                //onMouseEnter={() => setIsDeleteHover(true)}
-                //onMouseLeave={() => setIsDeleteHover(false)}
                 aria-label="Remove saved article"
               >
                 <img

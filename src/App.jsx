@@ -9,10 +9,6 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import SavedNewsPage from "./pages/SavedNewsPage/SavedNewsPage";
 import { compareUrl } from "./utils/compareUrl";
 import {
-  fetchSavedArticlesFromLocal,
-  saveSavedArticlesToLocal,
-} from "./utils/storage";
-import {
   fakeRegisterUser,
   fakeLoginUser,
   fakeSaveBookmark,
@@ -111,7 +107,6 @@ function App() {
   };
 
   const handleBookmark = async (article) => {
-    console.log("Bookmark clicked:", article);
     if (!article?.url) return;
     try {
       const id = compareUrl(article.url);
@@ -129,25 +124,19 @@ function App() {
 
   const handleSaveBookmark = async (article) => {
     try {
-      console.log("Received article:", article);
-      console.log("Received article.url:", article?.url);
-
       if (!article?.url) return;
 
       const res = await fakeSaveBookmark(article);
 
       setSavedArticles((prev) => {
         const id = compareUrl(article.url);
-        console.log(id, prev);
         const exists = prev.some((a) => compareUrl(a.url) === id);
-        console.log(exists, res);
         return exists ? prev : [...prev, res.saved];
       });
     } catch (err) {
       console.error("Save failed:", err.message);
     }
   };
-  console.log(savedArticles);
 
   const handleRemoveBookmark = async (articleId) => {
     try {
@@ -159,53 +148,6 @@ function App() {
       console.error("Remove failed:", err.message);
     }
   };
-
-  /*useEffect(() => {
-    if (!isLoggedIn) {
-      const local = fetchSavedArticlesFromLocal();
-      const seen = new Set();
-      const unique = [];
-      for (const a of local) {
-        const id = compareUrl(a?.url);
-        if (id && !seen.has(id)) {
-          seen.add(id);
-          unique.push(a);
-        }
-      }
-      setSavedArticles(unique);
-    }
-  }, [isLoggedIn]);*/
-
-  /*useEffect(() => {
-    if (!isLoggedIn) return;
-
-    (async () => {
-      try {
-        const serverList = await getFakeBookmarks();
-        const localList = fetchSavedArticlesFromLocal();
-        const serverById = new Map(
-          serverList.map((a) => [compareUrl(a.url), a])
-        );
-        const localById = new Map(localList.map((a) => [compareUrl(a.url), a]));
-        const missing = [];
-        for (const [id, item] of localById.entries()) {
-          if (!serverById.has(id)) missing.push(item);
-        }
-        if (missing.length) {
-          await Promise.allSettled(missing.map((a) => fakeSaveBookmark(a)));
-        }
-        const merged = await getFakeBookmarks();
-        setSavedArticles(merged);
-        saveSavedArticlesToLocal(merged);
-      } catch (err) {
-        console.error("Error merging bookmarks:", err);
-      }
-    })();
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    saveSavedArticlesToLocal(savedArticles);
-  }, [savedArticles]);*/
 
   const handleDelete = (id) => {
     setSavedArticles((prev) => prev.filter((article) => article._id !== id));
@@ -236,6 +178,7 @@ function App() {
                   handleLogOut={handleLogOut}
                   onBookmark={handleBookmark}
                   savedArticles={savedArticles}
+                  handleCloseModal={handleCloseModal}
                 />
               </>
             }

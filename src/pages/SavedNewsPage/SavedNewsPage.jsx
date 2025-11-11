@@ -43,7 +43,11 @@ function SavedNewsPage({
             {username}, you have {savedArticles.length} saved article
             {savedArticles.length !== 1 ? "s" : ""}
           </h1>
-          <p className="saved-news__keywords">By keywords: {keywordSummary}</p>
+          <p className="saved-news__keywords">
+            {" "}
+            By keywords:{" "}
+            <span className="saved-news__keywords-bold">{keywordSummary}</span>
+          </p>
         </div>
         <NewsCardList
           articles={savedArticles}

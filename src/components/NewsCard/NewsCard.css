@@ -233,4 +233,17 @@
     top: 8px;
     left: 30px;
   }
+
+  .news-card__search-keyword {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 8px 20px;
+  }
+
+  .news-card__delete-message {
+    font-size: 8px;
+    line-height: 24px;
+    padding: 5px 10px;
+    top: -6px;
+  }
 }

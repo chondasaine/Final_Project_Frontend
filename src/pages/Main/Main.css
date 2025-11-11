@@ -26,11 +26,11 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 400px) {
   .hero {
     width: 100%;
     min-height: 400px;
-    padding-bottom: 48px;
+    padding-bottom: 32px;
     height: auto;
     display: block;
   }
