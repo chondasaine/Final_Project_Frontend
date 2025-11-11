@@ -7,7 +7,7 @@ function Header({
   isLoggedIn,
   handleLogOut,
   isSavedPage,
-  isLoginModalOpen,
+  isAnyModalOpen,
   handleCloseModal,
 }) {
   return (
@@ -18,7 +18,7 @@ function Header({
         isLoggedIn={isLoggedIn}
         handleLogOut={handleLogOut}
         isSavedPage={isSavedPage}
-        isLoginModalOpen={isLoginModalOpen}
+        isAnyModalOpen={isAnyModalOpen}
         handleCloseModal={handleCloseModal}
       />
       <div className="header__container"></div>

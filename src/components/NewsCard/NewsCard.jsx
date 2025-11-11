@@ -3,7 +3,6 @@ import { useState } from "react";
 import fallbackImage from "../../assets/fallback.jpg";
 import bookmarkActive from "../../assets/bookmarkActive.svg";
 import bookmarkDefault from "../../assets/bookmarkhover.svg";
-import deleteDefault from "../../assets/deletedefault.svg";
 import hoverDelete from "../../assets/hoverdelete.svg";
 
 function NewsCard({
@@ -33,7 +32,7 @@ function NewsCard({
   };
 
   return (
-    <div className="news-card-wrapper">
+    <div className="news-card__wrapper">
       <article
         className="news-card"
         role="article"

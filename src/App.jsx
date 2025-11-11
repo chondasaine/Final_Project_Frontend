@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Main from "./pages/Main/Main";
 import RegisterModal from "./components/modals/RegisterModal/RegisterModal";
 import Footer from "./components/Footer/Footer";
@@ -13,18 +12,15 @@ import {
   fakeLoginUser,
   fakeSaveBookmark,
   removeFakeSaveBookmark,
-  getFakeBookmarks,
 } from "./utils/mockApi";
 
 function App() {
   const [savedArticles, setSavedArticles] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [activeModal, setActiveModal] = useState("");
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const isAnyModalOpen = isLoginModalOpen || isRegisterModalOpen;
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -173,6 +169,7 @@ function App() {
                   onOpenRegisterModal={handleOpenRegisterModal}
                   onCloseModal={handleCloseModal}
                   isLoginModalOpen={isLoginModalOpen}
+                  isAnyModalOpen={isAnyModalOpen}
                   currentUser={currentUser}
                   isLoggedIn={isLoggedIn}
                   handleLogOut={handleLogOut}

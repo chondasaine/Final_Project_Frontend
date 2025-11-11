@@ -15,9 +15,9 @@ function SearchForm({ onSearch }) {
   };
 
   return (
-    <section className="search-section">
+    <section className="search__section">
       <form
-        className="search-form"
+        className="search__form"
         aria-label="Search news articles"
         onSubmit={handleSearchSubmit}
       >

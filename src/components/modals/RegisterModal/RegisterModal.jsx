@@ -12,15 +12,27 @@ function RegisterModal({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [userNameError, setUserNameError] = useState("");
   const [existingEmailError, setExistingEmailError] = useState("");
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+    setUserName("");
+    setEmailError("");
+    setPasswordError("");
+    setUserNameError("");
+    setExistingEmailError("");
+  }, [isOpen]);
+
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmailError(emailRegex.test(value) ? "" : "Invalid email address");
   };
 
@@ -38,39 +50,20 @@ function RegisterModal({
     setUserNameError(value.trim() ? "" : "User name is required");
   };
 
-  useEffect(() => {
-    setEmail("");
-    setPassword("");
-    setUserName("");
-    setExistingEmailError("");
-  }, [isOpen]);
+  function canSubmit() {
+    return (
+      emailRegex.test(email) &&
+      password.length >= 6 &&
+      userName.trim().length > 0 &&
+      !emailError &&
+      !passwordError &&
+      !userNameError
+    );
+  }
 
   const handleRegisterFormSubmit = (e) => {
     e.preventDefault();
-    let hasError = false;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.trim() || !emailRegex.test(email)) {
-      setEmailError("Invalid email address");
-      hasError = true;
-    } else {
-      setEmailError("");
-    }
-    if (!password.trim() || password.length < 6) {
-      setPasswordError("Password must be at least 6 characters");
-      hasError = true;
-    } else {
-      setPasswordError("");
-    }
-
-    if (!userName.trim()) {
-      setUserNameError("User name is required");
-      hasError = true;
-    } else {
-      setUserNameError("");
-    }
-
-    if (hasError) return;
-
+    if (!canSubmit()) return;
     onRegister({ email, password, userName });
   };
 
@@ -91,8 +84,19 @@ function RegisterModal({
           required
           value={email}
           onChange={handleEmailChange}
+          aria-invalid={!!emailError}
+          aria-describedby="register-email-error"
         />
-        {emailError && <span className="modal__error">{emailError}</span>}
+        {emailError && (
+          <span
+            id="register-email-error"
+            className="modal__error"
+            role="alert"
+            aria-live="assertive"
+          >
+            {emailError}
+          </span>
+        )}
       </label>
       <label htmlFor="register-password" className="modal__label">
         Password
@@ -102,28 +106,57 @@ function RegisterModal({
           className="modal__input"
           placeholder="Enter password"
           required
+          value={password}
           onChange={handlePasswordChange}
+          aria-invalid={!!passwordError}
+          aria-describedby="register-password-error"
         />
-        {passwordError && <span className="modal__error">{passwordError}</span>}
+        {passwordError && (
+          <span
+            id="register-password-error"
+            className="modal__error"
+            role="alert"
+            aria-live="assertive"
+          >
+            {passwordError}
+          </span>
+        )}
       </label>
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="username-register" className="modal__label">
         Username
         <input
+          id="username-register"
           type="text"
           className="modal__input"
-          id="username-register"
           placeholder="Enter your username"
           required
-          onChange={handleUserNameChange}
           value={userName}
+          onChange={handleUserNameChange}
+          aria-invalid={!!userNameError}
+          aria-describedby="register-username-error"
         />
-        {userNameError && <span className="modal__error">{userNameError}</span>}
+        {userNameError && (
+          <span
+            id="register-username-error"
+            className="modal__error"
+            role="alert"
+            aria-live="assertive"
+          >
+            {userNameError}
+          </span>
+        )}
       </label>
       <div className="modal__action">
         {registerError && (
-          <span className="modal__form-error">{registerError}</span>
+          <span
+            className="modal__form-error"
+            role="alert"
+            aria-live="assertive"
+          >
+            {registerError}
+          </span>
         )}
-        <button type="submit" className="modal__button">
+        <button type="submit" className="modal__button" disabled={!canSubmit()}>
           Sign up
         </button>
         <button

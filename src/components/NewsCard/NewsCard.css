@@ -11,7 +11,7 @@
   src: url("../../fonts/inter-400-regular.woff") format("woff");
 }
 
-.news-card-wrapper {
+.news-card__wrapper {
   overflow: hidden;
 }
 
@@ -245,5 +245,14 @@
     line-height: 24px;
     padding: 5px 10px;
     top: -6px;
+  }
+}
+
+@media (max-width: 400px) {
+  .news-card__error-message {
+    font-size: 12px;
+    padding: 10px 10px;
+    top: 25px;
+    left: 30px;
   }
 }

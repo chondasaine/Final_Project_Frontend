@@ -8,6 +8,7 @@ import logoutblack from "../../assets/logouticonblack.svg";
 import logoblack from "../../assets/NewsExplorerblack.svg";
 import hamburgerIcon from "../../assets/menu.svg";
 import closehamburger from "../../assets/closehamburger.svg";
+import hamburgerdark from "../../assets/hamburgerdark.svg";
 
 function Navigation({
   onOpenLoginModal,
@@ -15,16 +16,13 @@ function Navigation({
   isLoggedIn,
   handleLogOut,
   isSavedPage,
-  isLoginModalOpen,
+  isAnyModalOpen,
   handleCloseModal,
 }) {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 400);
-
-  const navigationClass = `navigation ${
-    isSavedPage ? "navigation_saved" : ""
-  } ${isMenuOpen ? "navigation_open" : ""}`;
+  const showCloseIcon = isMenuOpen || isAnyModalOpen;
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,6 +33,14 @@ function Navigation({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (isAnyModalOpen) setIsMenuOpen(false);
+  }, [isAnyModalOpen]);
+
+  const navigationClass = `navigation ${
+    isSavedPage ? "navigation_saved" : ""
+  } ${isMenuOpen ? "navigation_open" : ""}`;
 
   return (
     <nav className={navigationClass} aria-label="Main navigation">
@@ -51,15 +57,23 @@ function Navigation({
             className="navigation__menu-button"
             aria-label="Hamburger menu"
             onClick={() => {
-              if (isMenuOpen) {
+              if (isAnyModalOpen) {
                 handleCloseModal();
+                setIsMenuOpen(false);
+              } else {
+                setIsMenuOpen((prev) => !prev);
               }
-              setIsMenuOpen(!isMenuOpen);
             }}
           >
             <img
-              src={isMenuOpen ? closehamburger : hamburgerIcon}
-              alt="menu"
+              src={
+                isSavedPage
+                  ? hamburgerdark
+                  : showCloseIcon
+                  ? closehamburger
+                  : hamburgerIcon
+              }
+              alt={showCloseIcon ? "close" : "menu"}
               className="navigation__menu-icon"
             />
           </button>
@@ -124,7 +138,7 @@ function Navigation({
         )}
       </div>
 
-      {isMenuOpen && !isLoginModalOpen ? (
+      {isMenuOpen && !isAnyModalOpen ? (
         <>
           <div className="navigation__overlay"></div>
           <ul className="navigation__list navigation__list_open">
@@ -141,7 +155,7 @@ function Navigation({
 
             {isLoggedIn ? (
               <>
-                <li>
+                <li className="navigation__link_saved">
                   <Link
                     to="/saved-news"
                     className={`navigation__link ${
@@ -174,7 +188,10 @@ function Navigation({
               <li>
                 <button
                   type="button"
-                  onClick={onOpenLoginModal}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onOpenLoginModal();
+                  }}
                   className="navigation__button"
                 >
                   Sign in

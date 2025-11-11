@@ -8,7 +8,6 @@ import About from "../../components/About/About";
 
 import { useState } from "react";
 import { fetchArticles } from "../../utils/api";
-import ModalWithForm from "../../components/modals/ModalWithForm/ModalWithForm";
 
 function Main({
   onOpenLoginModal,
@@ -17,7 +16,7 @@ function Main({
   handleLogOut,
   onBookmark,
   savedArticles,
-  isLoginModalOpen,
+  isAnyModalOpen,
   handleCloseModal,
 }) {
   const [articles, setArticles] = useState([]);
@@ -54,7 +53,7 @@ function Main({
               currentUser={currentUser}
               isLoggedIn={isLoggedIn}
               handleLogOut={handleLogOut}
-              isLoginModalOpen={isLoginModalOpen}
+              isAnyModalOpen={isAnyModalOpen}
               handleCloseModal={handleCloseModal}
             />
             <SearchForm onSearch={handleSearch} />

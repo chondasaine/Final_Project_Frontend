@@ -5,14 +5,14 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 function Footer() {
   return (
     <footer className="footer">
-      <nav className="footer-nav">
-        <p className="footer-info">
+      <nav className="footer__nav">
+        <p className="footer__info">
           &copy; 2025 Supersite, Powered by News API
         </p>
-        <ul className="footer-url">
-          <div className="footer-links">
+        <ul className="footer__url">
+          <div className="footer__links">
             <li>
-              <Link to="/" className="footer-link footer-link_home">
+              <Link to="/" className="footer__link footer__link_home">
                 Home
               </Link>
             </li>
@@ -21,19 +21,19 @@ function Footer() {
                 href="https://tripleten.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="footer-link footer-link_tt"
+                className="footer__link footer__link_tt"
               >
                 TripleTen
               </a>
             </li>
           </div>
-          <div className="footer-icons">
+          <div className="footer__icons">
             <li>
               <a
                 href="https://github.com/chondasaine/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="footer-icon footer-icon_git"
+                className="footer__icon footer__icon_git"
               >
                 <FaGithub size={24} />
               </a>
@@ -43,7 +43,7 @@ function Footer() {
                 href="https://www.linkedin.com/in/chonda-saine/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="footer-icon footer-icon footer-icon__li"
+                className="footer__icon footer__icon footer__icon__li"
               >
                 <FaLinkedin size={24} />
               </a>

@@ -19,14 +19,19 @@
   position: fixed;
   inset: 0;
   visibility: hidden;
+  overflow-x: hidden;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 .modal__content {
   position: relative;
-  max-width: 430px;
+  max-width: min(430px, 100vw);
+  width: 100%;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 16px;
   padding: 36px;
+  pointer-events: auto;
 }
 
 .modal__opened {
@@ -46,6 +51,8 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  z-index: 1001;
+  pointer-events: auto;
 }
 .modal__title {
   font-family: "Roboto", sans-serif;
@@ -74,7 +81,6 @@
 .modal__input {
   display: block;
   margin-bottom: 31px;
-  width: 358px;
   height: 47px;
   border: none;
   outline: none;
@@ -91,7 +97,6 @@
 
 .modal__button {
   margin-top: 8px;
-  width: 360px;
   height: 64px;
   border-radius: 100px;
   background-color: rgba(47, 113, 229, 1);
@@ -104,6 +109,11 @@
   cursor: pointer;
 }
 
+.modal__input,
+.modal__button {
+  width: 100%;
+  max-width: 100%;
+}
 .modal__button-secondary {
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -154,10 +164,21 @@
   justify-content: center;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 @media (max-width: 400px) {
   .modal__content {
-    height: 560px;
+    height: min(620px, 100dvh);
+    overflow-y: auto;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+  }
+
+  .modal__close {
+    display: none;
   }
 }

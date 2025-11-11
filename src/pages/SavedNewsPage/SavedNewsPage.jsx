@@ -46,7 +46,12 @@ function SavedNewsPage({
           <p className="saved-news__keywords">
             {" "}
             By keywords:{" "}
-            <span className="saved-news__keywords-bold">{keywordSummary}</span>
+            <span
+              className="saved-news__keywords-bold"
+              style={{ textTransform: "none" }}
+            >
+              {keywordSummary}
+            </span>
           </p>
         </div>
         <NewsCardList
