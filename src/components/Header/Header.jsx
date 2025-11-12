@@ -1,4 +1,5 @@
 import "./Header.css";
+import { Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
 function Header({
@@ -12,6 +13,9 @@ function Header({
 }) {
   return (
     <header className="header" role="banner">
+      <div className="header__container">
+        <Link to="/"></Link>
+      </div>
       <Navigation
         onOpenLoginModal={onOpenLoginModal}
         currentUser={currentUser}
@@ -21,7 +25,6 @@ function Header({
         isAnyModalOpen={isAnyModalOpen}
         handleCloseModal={handleCloseModal}
       />
-      <div className="header__container"></div>
     </header>
   );
 }

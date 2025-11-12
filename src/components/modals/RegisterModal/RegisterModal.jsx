@@ -16,7 +16,6 @@ function RegisterModal({
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [userNameError, setUserNameError] = useState("");
-  const [existingEmailError, setExistingEmailError] = useState("");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -27,7 +26,6 @@ function RegisterModal({
     setEmailError("");
     setPasswordError("");
     setUserNameError("");
-    setExistingEmailError("");
   }, [isOpen]);
 
   const handleEmailChange = (e) => {

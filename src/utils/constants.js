@@ -1,3 +1,4 @@
+/* eslint-env node */
 export const APIkey = "d0d897d1e3164c6faec25c26e3291606";
 
 export const baseUrl =

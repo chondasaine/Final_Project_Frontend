@@ -13,14 +13,13 @@ function NewsCard({
   isSavedPage,
   onDelete,
 }) {
-  const { title, description, url, image, publishedAt, source, keyword } =
-    article;
+  const { title, description, url, image, publishedAt, source } = article;
 
   const searchKeyword =
     article?._search?.keyword ?? article?.searchKeyword ?? "";
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [isDeleteHover, setIsDeleteHover] = useState(false);
+  //const [isDeleteHover, setIsDeleteHover] = useState(false);
 
   const handleBookmarkClick = () => {
     if (!isLoggedIn) {

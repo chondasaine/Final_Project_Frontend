@@ -9,21 +9,21 @@ import SavedNewsPage from "./pages/SavedNewsPage/SavedNewsPage";
 import { compareUrl } from "./utils/compareUrl";
 import {
   fakeRegisterUser,
-  fakeLoginUser,
   fakeSaveBookmark,
+  fakeUsers,
   removeFakeSaveBookmark,
 } from "./utils/mockApi";
 
 function App() {
   const [savedArticles, setSavedArticles] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
+  //const [username, setUsername] = useState("");
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const isAnyModalOpen = isLoginModalOpen || isRegisterModalOpen;
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState("");
-  const [loginError, setLoginError] = useState("");
+  //const [token, setToken] = useState("");
+  //const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
 
   /*const handleSaveArticle = (article) => {
@@ -49,9 +49,13 @@ function App() {
 
   const handleLoginSubmit = async ({ email, password }) => {
     try {
-      const userData = await fakeLoginUser({ email, password });
+      const user = fakeUsers.find(
+        (u) => u.email === email && u.password === password
+      );
+      if (!user) throw new Error("Invalid credentials");
+
       setIsLoggedIn(true);
-      setCurrentUser(userData);
+      setCurrentUser(user);
       handleCloseModal();
     } catch (err) {
       console.error("Login failed:", err.message);
@@ -60,7 +64,7 @@ function App() {
 
   const handleRegisterSubmit = async ({ userName, email, password }) => {
     try {
-      const userData = await fakeRegisterUser({ userName, email, password });
+      await fakeRegisterUser({ userName, email, password });
       setIsLoggedIn(true);
       setCurrentUser({ username: userName, email });
       setRegisterError("");
@@ -80,7 +84,7 @@ function App() {
     setIsRegisterModalOpen(false);
   };
 
-  const handleRegister = async (formData) => {
+  /*const handleRegister = async (formData) => {
     try {
       const res = await fakeRegisterUser(formData);
       setIsLoggedIn(true);
@@ -100,7 +104,7 @@ function App() {
     } catch (err) {
       setLoginError(err.message);
     }
-  };
+  };*/
 
   const handleBookmark = async (article) => {
     if (!article?.url) return;
@@ -152,7 +156,6 @@ function App() {
   const handleLogOut = () => {
     setIsLoggedIn(false);
     setCurrentUser(null);
-    setToken("");
     setSavedArticles([]);
   };
 

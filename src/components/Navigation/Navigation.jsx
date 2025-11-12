@@ -17,7 +17,6 @@ function Navigation({
   handleLogOut,
   isSavedPage,
   isAnyModalOpen,
-  handleCloseModal,
 }) {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,6 +37,12 @@ function Navigation({
     if (isAnyModalOpen) setIsMenuOpen(false);
   }, [isAnyModalOpen]);
 
+  useEffect(() => {
+    if (!isMobile) {
+      setIsMenuOpen(false);
+    }
+  }, [isMobile]);
+
   const navigationClass = `navigation ${
     isSavedPage ? "navigation_saved" : ""
   } ${isMenuOpen ? "navigation_open" : ""}`;
@@ -52,18 +57,11 @@ function Navigation({
             className="navigation__logo"
           />
         </Link>
-        {isMobile ? (
+        {isMobile && !isAnyModalOpen ? (
           <button
             className="navigation__menu-button"
             aria-label="Hamburger menu"
-            onClick={() => {
-              if (isAnyModalOpen) {
-                handleCloseModal();
-                setIsMenuOpen(false);
-              } else {
-                setIsMenuOpen((prev) => !prev);
-              }
-            }}
+            onClick={() => setIsMenuOpen((prev) => !prev)}
           >
             <img
               src={
@@ -73,11 +71,12 @@ function Navigation({
                   ? closehamburger
                   : hamburgerIcon
               }
-              alt={showCloseIcon ? "close" : "menu"}
+              alt={isMenuOpen ? "close" : "menu"}
               className="navigation__menu-icon"
             />
           </button>
-        ) : (
+        ) : null}
+        {!isMobile && (
           <>
             <ul className="navigation__list navigation__list_open">
               <li className="navigation__link_home">
@@ -111,9 +110,7 @@ function Navigation({
                       className="navigation__signout-button"
                       onClick={handleLogOut}
                     >
-                      {currentUser?.username
-                        ? `${currentUser.username}`
-                        : "Sign out"}
+                      {currentUser?.username || "Sign out"}
                       <img
                         src={isSavedPage ? logoutblack : logoutwhite}
                         alt="Sign out icon"
@@ -137,8 +134,7 @@ function Navigation({
           </>
         )}
       </div>
-
-      {isMenuOpen && !isAnyModalOpen ? (
+      {isMobile && isMenuOpen && !isAnyModalOpen && (
         <>
           <div className="navigation__overlay"></div>
           <ul className="navigation__list navigation__list_open">
@@ -173,9 +169,7 @@ function Navigation({
                     className="navigation__signout-button"
                     onClick={handleLogOut}
                   >
-                    {currentUser?.username
-                      ? `${currentUser.username}`
-                      : "Sign out"}
+                    {currentUser?.username || "Sign out"}
                     <img
                       src={isSavedPage ? logoutblack : logoutwhite}
                       alt="Sign out icon"
@@ -200,7 +194,7 @@ function Navigation({
             )}
           </ul>
         </>
-      ) : null}
+      )}
     </nav>
   );
 }

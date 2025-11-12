@@ -21,7 +21,7 @@ function SearchForm({ onSearch }) {
         aria-label="Search news articles"
         onSubmit={handleSearchSubmit}
       >
-        <h1 className="search__header">What's going on in the world?</h1>
+        <h1 className="search__header">What&apos;s going on in the world?</h1>
         <h3 className="search__content">
           Find the latest news on any topic and save them in your personal
           account.

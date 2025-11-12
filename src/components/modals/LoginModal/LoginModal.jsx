@@ -13,7 +13,6 @@ function LoginModal({
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [signInError, setSignInError] = useState("");
-  const isPasswordValid = password.length > 6;
 
   const handleEmailChange = (e) => {
     const value = e.target.value;

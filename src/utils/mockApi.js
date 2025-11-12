@@ -1,6 +1,6 @@
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-const fakeUsers = [
+export const fakeUsers = [
   {
     email: "test.user1@gmail.com",
     password: "Test1@1234",

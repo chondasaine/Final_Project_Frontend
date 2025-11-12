@@ -47,6 +47,11 @@
   cursor: pointer;
 }
 
+.navigation__menu-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(74, 144, 226, 0.6);
+}
+
 .navigation__list {
   list-style: none;
   display: flex;
@@ -102,6 +107,31 @@
   text-align: end;
 }
 
+.navigation_saved.navigation_open .navigation__menu-icon {
+  filter: invert(1);
+}
+
+.navigation_saved.navigation_open .navigation__link,
+.navigation_saved.navigation_open .navigation__signout-button,
+.navigation_saved.navigation_open .navigation__button {
+  color: #fff;
+}
+
+.navigation_saved.navigation_open .navigation__signout-button {
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 8px 16px;
+  background: transparent;
+}
+
+.navigation_saved.navigation_open .navigation__signout-icon {
+  content: url("../../assets/logouticonwhite.svg");
+}
+
+.navigation_saved.navigation_open .navigation__logo {
+  filter: brightness(0) invert(1);
+}
+
 .navigation_saved .navigation__link {
   color: rgba(26, 27, 34, 1);
   cursor: pointer;
@@ -147,6 +177,11 @@
   cursor: pointer;
 }
 
+.navigation__button:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(74, 144, 226, 0.6);
+}
+
 .navigation__signout-button {
   display: flex;
   align-items: center;
@@ -168,6 +203,11 @@
   cursor: pointer;
 }
 
+.navigation__signout-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(74, 144, 226, 0.6);
+}
+
 .navigation_saved .navigation__signout-button {
   border-color: rgba(26, 27, 34, 1);
   color: rgba(26, 27, 34, 1);
@@ -175,19 +215,14 @@
 }
 
 .navigation__signout-icon {
-  width: 18px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   padding-right: 12px;
 }
 
 .navigation_saved .navigation__signout-icon {
   width: 24px;
   height: 24px;
-}
-
-html,
-body {
-  overflow-x: clip;
 }
 
 @media (max-width: 768px) {
