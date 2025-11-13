@@ -1,0 +1,215 @@
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("../../fonts/roboto-500-regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../../fonts/roboto-900.woff") format("woff");
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../fonts/inter-400-regular.woff") format("woff");
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  visibility: hidden;
+  overflow-x: hidden;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.modal__content {
+  position: relative;
+  max-width: min(430px, 100vw);
+  width: 100%;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+  padding: 36px;
+  pointer-events: auto;
+}
+
+.modal__opened {
+  visibility: visible;
+}
+
+.modal__close {
+  position: fixed;
+  top: 100px;
+  right: 250px;
+  width: 45px;
+  height: 40px;
+  background-image: url("../../../assets/close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 3000;
+  pointer-events: auto;
+}
+.modal__title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  margin: 0 0 22px 0;
+}
+
+.modal__form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__label {
+  position: relative;
+  margin-bottom: 9px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: rgba(47, 113, 229, 1);
+}
+
+.modal__input {
+  display: block;
+  margin-bottom: 31px;
+  height: 47px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.modal__input::placeholder {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.modal__input:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(74, 144, 226, 0.6);
+}
+
+.modal__button {
+  margin-top: 8px;
+  height: 64px;
+  border-radius: 100px;
+  background-color: rgba(47, 113, 229, 1);
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.modal__button:hover {
+  background-color: rgba(52, 126, 255, 1);
+}
+
+.modal__input,
+.modal__button {
+  width: 100%;
+  max-width: 100%;
+}
+
+.modal__input:focus,
+.modal__button:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(74, 144, 226, 0.6);
+}
+
+.modal__button-secondary {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  margin-top: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.modal__button:disabled {
+  background-color: rgba(230, 232, 235, 1);
+  color: rgba(182, 188, 191, 1);
+  cursor: not-allowed;
+}
+
+.modal__link {
+  color: rgba(47, 113, 229, 1);
+}
+
+.modal__error {
+  position: absolute;
+  top: 65px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: rgba(255, 0, 0, 1);
+  margin: 10px 0 13px 0;
+  display: block;
+}
+
+.modal__form-error {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: rgba(255, 0, 0, 1);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.modal__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal__close {
+    top: 110px;
+    right: 110px;
+    transform: none;
+    z-index: 3001;
+  }
+}
+
+@media (max-width: 580px) {
+  .modal__content {
+    height: min(620px, 100dvh);
+    overflow-y: auto;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .modal__close {
+    position: absolute;
+    top: 20px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    transform: none;
+    z-index: 3002;
+  }
+}
