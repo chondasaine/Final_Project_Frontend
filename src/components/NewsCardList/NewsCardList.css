@@ -1,12 +1,12 @@
 .news-card-list {
-  min-height: 974px;
+  min-height: 80px;
   margin: 0;
   padding: 62px 104px;
   background-color: rgba(245, 246, 247, 1);
 }
 
 .news-card-list__section-title {
-  margin: 0 0 64px 104px;
+  margin: 0 0 64px 0;
   font-family: "Roboto Slab", sans-serif;
   font-weight: 400;
   font-size: 40px;
@@ -73,7 +73,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 580px) {
   .news-card-list {
     margin: 0 0 12px 0;
   }

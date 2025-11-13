@@ -114,6 +114,10 @@
   cursor: pointer;
 }
 
+.modal__button:hover {
+  background-color: rgba(52, 126, 255, 1);
+}
+
 .modal__input,
 .modal__button {
   width: 100%;
@@ -191,7 +195,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 580px) {
   .modal__content {
     height: min(620px, 100dvh);
     overflow-y: auto;
@@ -200,11 +204,11 @@
   }
 
   .modal__close {
+    position: absolute;
     top: 20px;
-    left: 340px;
+    right: 12px;
     width: 24px;
     height: 24px;
-    right: auto;
     transform: none;
     z-index: 3002;
   }

@@ -83,7 +83,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 580px) {
   .footer__nav {
     display: flex;
     flex-direction: column-reverse;
